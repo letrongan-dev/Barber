@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Biz Admin - Multipurpose bootstrap 4 admin templates</title>
+	<!-- Tell the browser to be responsive to screen width -->
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Biz Admin is a Multipurpose bootstrap 4 Based Dashboard & Admin Site Responsive Template by uxliner." />
+	<meta name="keywords" content="admin, admin dashboard, admin template, cms, crm, Biz Admin, Biz Adminadmin, premium admin templates, responsive admin, sass, panel, software, ui, visualization, web app, application" />
+	<meta name="author" content="uxliner"/>
+	<th:block th:replace="fragment/backend/styles"/>
+</head>
+<body class="skin-blue sidebar-mini">
+<div class="wrapper boxed-wrapper">
+	<div th:replace="fragment/backend/navbar :: navbar"></div>
+	<div th:replace="fragment/backend/sidebar :: sidebar"></div>
+	<div class="content-wrapper" layout:fragment="content"></div>
+	<div th:replace="fragment/backend/footer :: footer"></div>
+</div>
+<th:block th:replace="fragment/backend/scripts"/>
+</body>
+</html>

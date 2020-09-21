@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="layout/backend/default">
+<head>
+<meta charset="UTF-8">
+<title>ADMIN | DASHBOARD</title>
+</head>
+<body>
+<div layout:fragment="content">
+	    <!-- Content Header (Page header) -->
+    <div class="content-header sty-one" >
+      <h1>Dashboard Agency</h1>
+      <ol class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><i class="fa fa-angle-right"></i> Dashboard Agency</li>
+      </ol>
+    </div>
+    
+    <!-- Main content -->
+    <div class="content">
+      <div class="row">
+        <div class="col-lg-3 col-sm-6 col-xs-12 m-b-3">
+          <div class="card">
+            <div class="card-body box-rounded box-gradient"> <span class="info-box-icon bg-transparent"><i class="ti-stats-up text-white"></i></span>
+              <div class="info-box-content">
+                <h6 class="info-box-text text-white">New Orders</h6>
+                <h1 class="text-white">5,500</h1>
+                <span class="progress-description text-white"> 70% Increase in 30 Days </span> </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 col-xs-12 m-b-3">
+          <div class="card">
+            <div class="card-body box-rounded box-gradient-4"> <span class="info-box-icon bg-transparent"><i class="ti-face-smile text-white"></i></span>
+              <div class="info-box-content">
+                <h6 class="info-box-text text-white">New Users</h6>
+                <h1 class="text-white">2,040</h1>
+                <span class="progress-description text-white"> 45% Increase in 30 Days </span> </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 col-xs-12 m-b-3">
+          <div class="card">
+            <div class="card-body box-rounded box-gradient-2"> <span class="info-box-icon bg-transparent"><i class="ti-bar-chart text-white"></i></span>
+              <div class="info-box-content">
+                <h6 class="info-box-text text-white">Online Revenue</h6>
+                <h1 class="text-white">6,450</h1>
+                <span class="progress-description text-white"> 65% Increase in 30 Days </span> </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 col-xs-12 m-b-3">
+          <div class="card">
+            <div class="card-body box-rounded box-gradient-3"> <span class="info-box-icon bg-transparent"><i class="ti-money text-white"></i></span>
+              <div class="info-box-content">
+                <h6 class="info-box-text text-white">Total Profit</h6>
+                <h1 class="text-white">$ 8,590</h1>
+                <span class="progress-description text-white"> 45% Increase in 30 Days </span> </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.row -->
+      
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="card m-b-3">
+            <div class="card-body">
+              <h5 class="m-b-1">Sales Analytics</h5>
+              <canvas id="line-chart"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="card m-b-3">
+            <div class="card-body">
+              <h5 class="m-b-1">Marketplaces</h5>
+              <canvas id="bar-chart" height="150"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.row -->
+      
+      <div class="row">
+        <div class="col-xl-4 m-b-3">
+          <div class="bg-aqua-gradient">
+            <div class="card-body">
+              <h5 class="text-white">Bandwidth usage</h5>
+              <h1 class="text-white font-weight-200">1,350 GB</h1>
+              <h5 class="text-white m-b-3">April 2018</h5>
+              <div id="spa-line-2"></div>
+              <p class="text-white m-t-2">Lorem ipsum dolor sit amet moles tiae, consectetur adipisicing elit users.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-8">
+          <div class="info-box">
+            <div class="card-header">
+              <h5 class="card-title">Recent Sales <a class="btn btn-sm btn-primary pull-right text-white">View all</a></h5>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Customer</th>
+                    <th>Categories</th>
+                    <th>Progress</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>iPone X</td>
+                    <td><img th:src="@{/backend/dist/img/img1.jpg}" class="img-circle img-w-30" alt="User Image"></td>
+                    <td><button type="button" class="btn btn-sm btn-outline-danger btn-rounded">Mobile</button></td>
+                    <td><div class="progress progress-sm">
+                        <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div></td>
+                    <td>$ 5,500</td>
+                  </tr>
+                  <tr>
+                    <td>OPPP</td>
+                    <td><img th:src="@{/backend/dist/img/img2.jpg}" class="img-circle img-w-30" alt="User Image"></td>
+                    <td><button type="button" class="btn btn-sm btn-outline-success btn-rounded">Tablet</button></td>
+                    <td><div class="progress progress-sm">
+                        <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div></td>
+                    <td>$ 3,450</td>
+                  </tr>
+                  <tr>
+                    <td>iPad</td>
+                    <td><img th:src="@{/backend/dist/img/img3.jpg}" class="img-circle img-w-30" alt="User Image"></td>
+                    <td><button type="button" class="btn btn-sm btn-outline-danger btn-rounded">Mobile</button></td>
+                    <td><div class="progress progress-sm">
+                        <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div></td>
+                    <td>$ 1,040</td>
+                  </tr>
+                  <tr>
+                    <td>OnePlus</td>
+                    <td><img th:src="@{/backend/dist/img/img1.jpg}" class="img-circle img-w-30" alt="User Image"></td>
+                    <td><button type="button" class="btn btn-sm btn-outline-success btn-rounded">Tablet</button></td>
+                    <td><div class="progress progress-sm">
+                        <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width:65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div></td>
+                    <td>$ 2,200</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.row -->
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="info-box">
+            <div class="box box-widget">
+              <div class="box-header with-border">
+                <div class="user-block"> <img class="img-circle" th:src="@{/backend/dist/img/img1.jpg}" alt="User Image"> <span class="username"><a href="#">Alexander Pierce</a></span> <span class="description">Shared publicly - 8:15 AM Today</span> </div>
+              </div>
+              <div class="box-body"> <img class="img-responsive pad" th:src="@{/backend/dist/img/img6.jpg}" alt="Photo">
+                <p>I took this photo this morning. What do you guys think?</p>
+                <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
+                <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
+                <span class="pull-right text-muted">153 likes - 23 comments</span> </div>
+              <div class="box-footer box-comments">
+                <div class="box-comment"> <img class="img-circle img-sm" th:src="@{/backend/dist/img/img3.jpg}" alt="User Image">
+                  <div class="comment-text"> <span class="username"> Maria Gonzales <span class="text-muted pull-right">12:15 PM Today</span> </span> It is a long established fact that a reader will be distracted. </div>
+                </div>
+              </div>
+              <div class="box-footer">
+                <form action="#" method="post">
+                  <img class="img-responsive img-circle img-sm" th:src="@{/backend/dist/img/img4.jpg}" alt="Alt Text"> 
+                  <!-- .img-push is used to add margin to elements next to floating images -->
+                  <div class="img-push">
+                    <input class="form-control input-sm" placeholder="Press enter to post comment" type="text">
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div id="carouselExampleIndicators1" class="carousel slide m-b-3" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExampleIndicators1" data-slide-to="0" class=""></li>
+              <li data-target="#carouselExampleIndicators1" data-slide-to="1" class="active"></li>
+              <li data-target="#carouselExampleIndicators1" data-slide-to="2" class=""></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item"> <img class="d-block w-100" th:src="@{/backend/dist/img/img8.jpg}" alt="First slide">
+                <div class="carousel-caption d-none d-md-block">
+                  <h3>First slide label</h3>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+              </div>
+              <div class="carousel-item active"> <img class="d-block w-100" th:src="@{/backend/dist/img/img7.jpg}" alt="Second slide">
+                <div class="carousel-caption d-none d-md-block">
+                  <h3>Second slide label</h3>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+              </div>
+              <div class="carousel-item"> <img class="d-block w-100" th:src="@{/backend/dist/img/img9.jpg}" alt="Third slide">
+                <div class="carousel-caption d-none d-md-block">
+                  <h3>Third slide label</h3>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators1" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a> <a class="carousel-control-next" href="#carouselExampleIndicators1" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a> </div>
+          <div class="m-b-3">
+            <div class="soci-wid-box bg-facebook m-b-3">
+              <div id="carouselExampleControls1" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner" role="listbox">
+                  <div class="carousel-item active">
+                    <div class="col-lg-12 text-center">
+                      <div class="sco-icon"><i class="icon-facebook"></i></div>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio praesent libero.</p>
+                      <p class="text-italic pt-1">- John Doe -</p>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="col-lg-12 text-center">
+                      <div class="sco-icon"><i class="icon-facebook"></i></div>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio praesent libero.</p>
+                      <p class="text-italic pt-1">- John Doe -</p>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="col-lg-12 text-center">
+                      <div class="sco-icon"><i class="icon-facebook"></i></div>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio praesent libero.</p>
+                      <p class="text-italic pt-1">- John Doe -</p>
+                    </div>
+                  </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleControls1" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a> <a class="carousel-control-next" href="#carouselExampleControls1" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a> </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.row --> 
+    </div>
+</div>
+<script type="text/javascript" layout:fragment="jscript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5b7257d2afc2c34e96e78bfc/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+</body>
+</html>
