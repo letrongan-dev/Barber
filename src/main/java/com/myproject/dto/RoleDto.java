@@ -1,13 +1,16 @@
 package com.myproject.dto;
 
+
+import javax.persistence.Column;
 import javax.validation.constraints.*;
-
+	
 public class RoleDto {
-
+	
 	private int id;
 	
 	@NotEmpty(message = "Tên không được để trống")
 	@Size(min=5, max=20 ,message = "Tên phải có 5-20 ký tự")
+	@Column(unique = true)
 	private String name;
 	
 	

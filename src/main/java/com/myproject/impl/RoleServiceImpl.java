@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.myproject.dto.RoleDto;
 import com.myproject.entity.Role;
 import com.myproject.reponsitory.RoleRepository;
 import com.myproject.service.RoleService;
 
+@Component
 public class RoleServiceImpl implements RoleService {
 	
 	@Autowired
@@ -36,5 +38,35 @@ public class RoleServiceImpl implements RoleService {
 		entity.setDescription(roleDto.getDesc());
 		roleRepository.save(entity);
 	}
+
+	@Override
+	public RoleDto findById(int id) {
+		Role entity = roleRepository.getOne(id);
+		RoleDto roleDto = new RoleDto();
+		roleDto.setId(entity.getId());
+		roleDto.setName(entity.getName());
+		roleDto.setDesc(entity.getDescription());
+		return roleDto;
+	}
+
+	@Override
+	public void update(RoleDto roleDto) {
+		Role entity = roleRepository.getOne(roleDto.getId());
+		entity.setName(roleDto.getName());
+		entity.setDescription(roleDto.getDesc());
+		roleRepository.save(entity);
+	}
+
+	@Override
+	public int delete(int id) {
+		Role entity = roleRepository.getOne(id);
+		if(entity != null) {
+			roleRepository.delete(entity);
+			return 1;
+		}else {
+			return 0;
+		}
+	}
+	
 
 }

@@ -29,8 +29,8 @@ public class Role {
 	@Column(name="description")
 	private String description;
 	
-//	@OneToMany(mappedBy = "role", fetch = FetchType.LAZY) //tên thuộc tính many to one vừa mới tạo
-//	private List<User> users; 
+	@OneToMany(mappedBy = "role", fetch = FetchType.LAZY) //tên thuộc tính many to one vừa mới tạo
+	private List<User> users; 
 	
 	public Role() {}
 	

@@ -4,16 +4,15 @@
 	  layout:decorator="layout/backend/default">
 <head>
 <meta charset="UTF-8">
-<title>Danh sách quyền</title>
-
+<title>Danh sách người dùng</title>
 </head>
 <body>
 <div layout:fragment="content">
 <div class="content-header sty-one">
-<h1> Danh sách quyền  </h1>
+<h1> Danh sách User  </h1>
   <ol class="breadcrumb mb-4">
     <li><a href="#">ADMIN</a></li>
-    <li><i class="fa fa-angle-right"></i> <a href="#">Danh sách quyền</a></li>
+    <li><i class="fa fa-angle-right"></i> <a href="#">Danh sách User</a></li>
   </ol>
 </div>
 <div class="content">
@@ -22,30 +21,41 @@
 	<div class="col-md-12">
       <div class="table-responsive mt-4">
         <table class="table">
-        	<a th:href="@{/admin/role/add}" class="btn btn-success text-white float-right">+ Thêm mới</a>
-          <thead class="bg-primary text-white">
+        	<a th:href="@{/admin/user/add}" class="btn btn-success text-white float-right">+ Thêm mới</a>
+          <thead class="bg-info text-white">
             <tr>
-              <th scope="col">STT</th>
-              <th scope="col">Tên quyền</th>
-              <th scope="col">Mô tả</th>
+            <th scope="col">Avatar</th>
+              <th scope="col">Code</th>
+              <th scope="col">Name</th>
+              <th scope="col">Phone</th>
+              <th scope="col">Email</th>
+              <th scope="col">Address</th>
+              <th scope="col">Role</th>
               <th scope="col">#</th>
             </tr>
           </thead>
           <tbody>
-	          <tr th:if="${roles == null || roles.empty}">
-	            	<td colspan="3" class="text-center">No Available</td>
+	          <tr th:if="${users == null || users.empty}">
+	            	<td colspan="8" class="text-center">No Available</td>
 	          </tr>
-            <tr th:each="item: ${roles}">
-              <th th:text="${item.id}" scope="row">1</th>
+            <tr th:each="item: ${users}">
+            <td><img alt="" th:src="@{${item.photosImagePath}}" style="height:70px; width:70px"></td>
+              <td th:text="${item.code}">A101</td>
               <td th:text="${item.name}">Mark</td>
-              <td th:text="${item.desc}">Otto</td>
+              <td th:text="${item.phone}">090908561</td>
+              <td th:text="${item.email}">admin@gmail.com</td>
+              <td th:text="${item.address}">Tphcm</td>
+              <td   th:each="itemRole: ${roles}" 
+      				th:if="${itemRole.id} == ${item.roleId}"
+              		th:text="${itemRole.desc}">1</td>
               <td>
-                   <a th:href="@{/admin/role/edit(id=${item.id})}" class="btn btn-sm btn-success">
+                   <a th:href="@{/admin/user/edit(id=${item.id})}" class="btn btn-sm btn-info">
                        <i class="fa fa-pencil-square-o"></i>
                    </a>
-                   <a data-confirm='Bạn thật sự muốn xóa quyền này ?' 
-					th:href="@{/admin/role/delete(id=${item.id})}" class="btn btn-sm btn-danger"><i class="fa fa-trash-o">
-					</i></a>
+                   <a data-confirm='Bạn thật sự muốn xóa user này ?'
+                    th:href="@{/admin/user/delete(id=${item.id})}" class="btn btn-sm btn-danger">
+                       <i class="fa fa-trash-o"></i>
+                   </a>
                </td>
             </tr>
           </tbody>
@@ -56,7 +66,6 @@
 	</div>
 	</div>
 </div>
-
 <script type="text/javascript" layout:fragment="jscript">
 $(document).ready(function(){
     $('[data-confirm]').on('click', function(e){
@@ -73,13 +82,13 @@ $(document).ready(function(){
             icon: "warning",
             buttons: true,
             dangerMode: true,
-            timer:1200,
+            timer:3000,
         })
         .then((willDelete) => {
           if (willDelete) {
-            swal("Poof! Your imaginary file has been deleted!", {
+            swal("Success! Xóa thành công!", {
               icon: "success",
-             
+              timer:4000
             });
             window.location.href = href;
           }

@@ -18,7 +18,10 @@
       		<div class="card">
       		<div class="card-body">
 	      		<h4 class="text-black text-center"><strong>Thêm mới quyền</strong></h4>
-	      	<form method="post" th:action="@{/admin/role/add}" th:object="${role}" >
+	      	<form method="post" th:action="@{/admin/role/edit}" th:object="${role}" >
+	          <div class="form-group">
+                  <input type="hidden" th:field="*{id}" class="form-control" placeholder="id" />
+              </div>
 	          <div class="col-md-6 offset-md-3">
 	            <fieldset class="form-group">
 	              <label>Tên quyền</label>
