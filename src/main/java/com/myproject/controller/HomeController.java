@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.myproject.dto.UserDto;
 
@@ -22,18 +23,15 @@ public class HomeController {
 	public String index() {
 		return "home/index";
 	}
+	
 	@GetMapping(value = "/test")
 	public String test() {
 		return "test";
 	}
-	@GetMapping(value = "/login")
-	public String form() {
-		return"login";
-	}
-	@PostMapping(value = "/login")
-	public String login(@Valid @ModelAttribute("user") UserDto userDto, BindingResult bindingResult, ModelMap modelMap ) {
-		
-		return null;
-		
-	}
+	
+//	@PostMapping(value = "/login")
+//	public String login(@Valid @ModelAttribute("user") UserDto userDto, BindingResult bindingResult, ModelMap modelMap ) {
+//		return null;
+//		
+//	}
 }

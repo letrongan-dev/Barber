@@ -1,4 +1,4 @@
-<header class="main-header" xmlns:th="http://www.thymeleaf.org" th:fragment="navbar"> 
+<header class="main-header" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" th:fragment="navbar"> 
     <!-- Logo --> 
     <a href="index.html" class="logo blue-bg"> 
     <!-- mini logo for sidebar mini 50x50 pixels --> 
@@ -100,7 +100,7 @@
               <li role="separator" class="divider"></li>
               <li><a href="#"><i class="icon-gears"></i> Account Setting</a></li>
               <li role="separator" class="divider"></li>
-              <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
+              <li><a th:href="@{/logout}"><i class="fa fa-power-off"></i> Logout</a></li>
             </ul>
           </li>
           <!-- Control Sidebar Toggle Button -->

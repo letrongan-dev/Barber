@@ -26,13 +26,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 		List<Appointment> listEntity = appRepsitory.findAll();
 		List<AppointmentDto> listDto = new ArrayList<AppointmentDto>();
 		for(Appointment entity : listEntity) {
-			listDto.add(new AppointmentDto(entity.getId(), 
-					entity.getCode(), 
-					entity.getDate(), 
-					entity.getName(), 
-					entity.getNameStylist(), 
-					entity.getPhone(), 
-					entity.getTime()));
+			listDto.add(entityChangeDto(entity));
 		}
 		return listDto;
 	}
@@ -46,6 +40,8 @@ public class AppointmentServiceImpl implements AppointmentService {
 		appDto.setDate(entity.getDate());
 		appDto.setPhone(entity.getPhone());
 		appDto.setTime(entity.getTime());
+		appDto.setMessage(entity.getMessage());
+		appDto.setComboId(entity.getComboId());
 		return appDto;
 	}
 	
@@ -58,6 +54,26 @@ public class AppointmentServiceImpl implements AppointmentService {
 		entity.setPhone(appDto.getPhone());
 		entity.setTime(appDto.getTime());
 		entity.setDate(appDto.getDate());
+		entity.setComboId(appDto.getComboId());
+		entity.setMessage(appDto.getMessage());
 		return entity;
+	}
+
+	@Override
+	public int delete(int id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public AppointmentDto findById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void edit(AppointmentDto appDto) {
+		// TODO Auto-generated method stub
+		
 	}
 }

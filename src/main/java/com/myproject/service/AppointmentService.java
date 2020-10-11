@@ -9,6 +9,7 @@ public interface AppointmentService {
 
 	void add (AppointmentDto appDto);
 	List<AppointmentDto> findAll();
-	
-	
+	int delete (int id);
+	AppointmentDto findById(int id);
+	void edit (AppointmentDto appDto);
 }

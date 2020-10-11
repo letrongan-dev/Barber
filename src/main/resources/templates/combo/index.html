@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="layout/backend/default">
+<head>
+<meta charset="UTF-8">
+<title>Danh sách Combo</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="content-header sty-one">
+<h1> Danh sách Combo  </h1>
+  <ol class="breadcrumb mb-4">
+    <li><a href="#">ADMIN</a></li>
+    <li><i class="fa fa-angle-right"></i> <a href="#">Danh sách Combo</a></li>
+  </ol>
+</div>
+<div class="content">
+   <div class="card">
+   <div class="card-body">
+	<div class="col-md-12">
+      <div class="table-responsive mt-4">
+        <table class="table">
+        	<a th:href="@{/admin/combo/add}" class="btn btn-success text-white float-right">+ Thêm mới</a>
+          <thead class="bg-info text-white">
+            <tr>
+            <th scope="col">STT</th>
+              <th scope="col">Name</th>
+              <th scope="col">Price</th>
+              <th scope="col">Step 1</th>
+              <th scope="col">Step 2</th>
+              <th scope="col">Step 3</th>
+              <th scope="col">Step 4</th>
+              <th scope="col">Step 5</th>
+              <th scope="col">#</th>
+            </tr>
+          </thead>
+          <tbody>
+	          <tr th:if="${combos == null || combos.empty}">
+	            	<td colspan="8" class="text-center">No Available</td>
+	          </tr>
+            <tr th:each="item: ${combos}">
+              <td th:text="${item.id}">A101</td>
+              <td th:text="${item.name}">Mark</td>
+              <td th:text="${item.price}">090908561</td>
+              <td th:text="${item.step1}">admin@gmail.com</td>
+              <td th:text="${item.step2}">Tphcm</td>
+              <td th:text="${item.step3}">1</td>
+              <td th:text="${item.step4}">1</td>
+              <td th:text="${item.step5}">1</td>
+              <td>
+                   <a th:href="@{/admin/combo/edit(id=${item.id})}" class="btn btn-sm btn-info">
+                       <i class="fa fa-pencil-square-o"></i>
+                   </a>
+                   <a data-confirm='Bạn thật sự muốn xóa combo này ?'
+                    th:href="@{/admin/combo/delete(id=${item.id})}" class="btn btn-sm btn-danger">
+                       <i class="fa fa-trash-o"></i>
+                   </a>
+               </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+	</div>
+	</div>
+	</div>
+</div>
+<script type="text/javascript" layout:fragment="jscript">
+$(document).ready(function(){
+    $('[data-confirm]').on('click', function(e){
+        e.preventDefault(); //cancel default action
+
+        //Recuperate href value
+        var href = $(this).attr('href');
+        var message = $(this).data('confirm');
+
+        //pop up
+        swal({
+            title: "Are you sure ??",
+            text: message, 
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            timer:3000,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            swal("Success! Xóa thành công!", {
+              icon: "success",
+              timer:7000
+            });
+            window.location.href = href;
+          }
+        });
+    });
+});
+</script>
+</body>
+</html>

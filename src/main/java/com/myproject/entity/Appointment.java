@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -40,11 +42,54 @@ public class Appointment {
 	@Column(name = "time", nullable = false)
 	private String time;
 
+	@Column(name="combo_id", nullable = false)
+	private int comboId;
+	
+	
+	@Column(name = "message")
+	private String message;
+	
+	
+	@ManyToOne
+	@JoinColumn(name = "combo_id",insertable = false, updatable = false)
+	private Combo combo;
 
 	public Appointment() {
 		super();
 	}
 
+	public Appointment(int id, String code, Date date, String name, String nameStylist, String phone, String time,
+			int comboId, String message, Combo combo) {
+		super();
+		this.id = id;
+		this.code = code;
+		this.date = date;
+		this.name = name;
+		this.nameStylist = nameStylist;
+		this.phone = phone;
+		this.time = time;
+		this.comboId = comboId;
+		this.message = message;
+		this.combo = combo;
+	}
+
+
+
+
+
+	public Appointment(int id, String code, Date date, String name, String nameStylist, String phone, String time,
+			int comboId, Combo combo) {
+		super();
+		this.id = id;
+		this.code = code;
+		this.date = date;
+		this.name = name;
+		this.nameStylist = nameStylist;
+		this.phone = phone;
+		this.time = time;
+		this.comboId = comboId;
+		this.combo = combo;
+	}
 
 	public Appointment(int id, String code, Date date, String name, String nameStylist, String phone, String time) {
 		super();
@@ -126,4 +171,30 @@ public class Appointment {
 	public void setTime(String time) {
 		this.time = time;
 	}
+
+	public int getComboId() {
+		return comboId;
+	}
+
+	public void setComboId(int comboId) {
+		this.comboId = comboId;
+	}
+
+	public Combo getCombo() {
+		return combo;
+	}
+
+	public void setCombo(Combo combo) {
+		this.combo = combo;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	
+	
 }

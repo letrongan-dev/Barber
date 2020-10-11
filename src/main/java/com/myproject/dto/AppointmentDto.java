@@ -5,6 +5,8 @@ import java.util.Date;
 
 
 public class AppointmentDto {
+	
+	
 	private int id;
 	private String code;
 	private Date date;
@@ -12,11 +14,32 @@ public class AppointmentDto {
 	private String nameStylist;
 	private String phone;
 	private String time;
+	private String message;
+	private int comboId;
 	
 	
 	public AppointmentDto() {
 		
 	}
+
+	
+	
+
+	public AppointmentDto(int id, String code, Date date, String name, String nameStylist, String phone, String time,
+			String message, int comboId) {
+		super();
+		this.id = id;
+		this.code = code;
+		this.date = date;
+		this.name = name;
+		this.nameStylist = nameStylist;
+		this.phone = phone;
+		this.time = time;
+		this.message = message;
+		this.comboId = comboId;
+	}
+
+
 
 
 	public AppointmentDto(int id, String code, Date date, String name, String nameStylist, String phone, String time) {
@@ -99,4 +122,34 @@ public class AppointmentDto {
 	public void setTime(String time) {
 		this.time = time;
 	}
+
+
+
+
+	public String getMessage() {
+		return message;
+	}
+
+
+
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+
+
+
+	public int getComboId() {
+		return comboId;
+	}
+
+
+
+
+	public void setComboId(int comboId) {
+		this.comboId = comboId;
+	}
+	
+	
 }

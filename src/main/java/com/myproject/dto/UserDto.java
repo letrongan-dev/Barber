@@ -45,6 +45,13 @@ public class UserDto {
 		this.avatar = avatar;
 		this.roleName = roleName;
 	}
+	
+	public UserDto(String email, String password, String roleName) {
+		super();
+		this.email = email;
+		this.password = password;
+		this.roleName = roleName;
+	}
 
 	public int getId() {
 		return id;
