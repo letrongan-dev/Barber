@@ -121,7 +121,7 @@
              </div>
              <div class="col-sm-6">
                <div class="form-group">
-                 <input type="text" class="form-control appointment_date" name="date" placeholder="Date" th:field="*{date}">
+                 <input type="date" name="date" placeholder="Date" th:field="*{date}">
                  <p class="alert alert-danger" th:if="${#fields.hasErrors('date')}" th:errors="*{date}" />
                </div>    
              </div>
@@ -135,11 +135,11 @@
                <div class="form-group">
 	               <div class="select-wrap">
 	                  <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-	                  <select class="form-control" th:field="*{comboName}">
+	                  <select class="form-control" th:field="*{comboId}">
 	                  	<option th:each="item: ${combos}" th:value="${item.id}" th:text="${item.name}">Professional Makeup</option>
 	                  </select>
 	                </div>
-	              <p class="alert alert-danger" th:if="${#fields.hasErrors('comboName')}" th:errors="*{comboName}" />
+	              <p class="alert alert-danger" th:if="${#fields.hasErrors('comboId')}" th:errors="*{comboId}" />
 	            </div>
              </div>
              <div class="col-sm-6">

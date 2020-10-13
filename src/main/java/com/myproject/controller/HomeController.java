@@ -1,7 +1,10 @@
 package com.myproject.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -13,14 +16,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.myproject.dto.AppointmentDto;
+import com.myproject.dto.ComboDto;
 import com.myproject.dto.UserDto;
+import com.myproject.service.ComboService;
 
 @Component
 @RequestMapping("/")
 public class HomeController {
 
+	@Autowired
+	private ComboService comSer;
+	
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String index() {
+	public String index(ModelMap model) {
+		AppointmentDto dtos = new AppointmentDto();
+		List<ComboDto> combos = comSer.findAll();
+		model.addAttribute("combos", combos);
+		model.addAttribute("appointment", dtos);
 		return "home/index";
 	}
 	
