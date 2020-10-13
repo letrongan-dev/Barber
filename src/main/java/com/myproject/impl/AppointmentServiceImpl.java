@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.myproject.dto.AppointmentDto;
 import com.myproject.entity.Appointment;
 import com.myproject.reponsitory.AppointmentRepository;
 import com.myproject.service.AppointmentService;
 
+@Service
 public class AppointmentServiceImpl implements AppointmentService {
 
 	@Autowired
@@ -17,8 +19,8 @@ public class AppointmentServiceImpl implements AppointmentService {
 	
 	@Override
 	public void add(AppointmentDto appDto) {
-		// TODO Auto-generated method stub
-		
+		Appointment entity = dtoChangeEntity(appDto);
+		appRepsitory.save(entity);
 	}
 
 	@Override
@@ -34,7 +36,6 @@ public class AppointmentServiceImpl implements AppointmentService {
 	public AppointmentDto entityChangeDto(Appointment entity) {
 		AppointmentDto appDto = new AppointmentDto();
 		appDto.setId(entity.getId());
-		appDto.setCode(entity.getCode());
 		appDto.setName(entity.getName());
 		appDto.setNameStylist(entity.getNameStylist());
 		appDto.setDate(entity.getDate());
@@ -47,8 +48,6 @@ public class AppointmentServiceImpl implements AppointmentService {
 	
 	public Appointment dtoChangeEntity(AppointmentDto appDto) {
 		Appointment entity = new Appointment();
-		entity.setId(appDto.getId());
-		entity.setCode(appDto.getCode());
 		entity.setName(appDto.getName());
 		entity.setNameStylist(appDto.getNameStylist());
 		entity.setPhone(appDto.getPhone());

@@ -48,7 +48,7 @@ public class ComboController {
 			return "redirect:/admin/combo";
 		}
 	}
-	@GetMapping(value = "combo/delete")
+	@GetMapping(value = "/combo/delete")
 	public String delete(@RequestParam("id") int id, ModelMap model) {
 		int result = comboServ.delete(id);
 		if(result==1) {
@@ -59,11 +59,20 @@ public class ComboController {
 			return "redirect:/admin/combo";
 		}
 	}
-	@GetMapping(value = "combo/edit")
+	@GetMapping(value = "/combo/edit")
 	public String edit(@RequestParam("id") int id, ModelMap model) {
 		ComboDto dto = comboServ.findById(id);
 		model.addAttribute("combo", dto);
 		return "combo/edit";
 	}
-	
+	@PostMapping(value = "/combo/edit")
+	public String update(@Valid @ModelAttribute("combo")ComboDto comboDto, BindingResult bindingResult, ModelMap model) {
+		if(bindingResult.hasErrors()) {
+			return "combo/edit";
+		}else {
+			comboServ.update(comboDto);
+			model.addAttribute("success", "Update thành công !!");
+			return "redirect:/admin/combo";
+		}
+	}
 }

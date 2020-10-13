@@ -21,8 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.myproject.dto.RoleDto;
 import com.myproject.dto.UserDto;
 import com.myproject.dto.UserDtoUpdate;
-import com.myproject.entity.MyFile;
-import com.myproject.service.FileService;
 import com.myproject.service.RoleService;
 import com.myproject.service.UserService;
 import com.myproject.util.FileUploadUtil;
@@ -51,12 +49,10 @@ public class UserController {
 	@GetMapping(value = "/user/add")
 	public String add(ModelMap model) {
 		UserDto userDto = new UserDto();
-		MyFile myFile = new MyFile();
 		List<RoleDto> roles = roleService.getAll();
 		userDto.setCode(userService.generateRandom(10));
 		model.addAttribute("user", userDto);
 		model.addAttribute("roles", roles);
-		model.addAttribute("myfile", myFile);
 		return "user/add";
 	}
 //	@PostMapping(value = "/user/add")

@@ -68,14 +68,15 @@ public class ComboServiceImpl implements ComboService {
 
 	@Override
 	public void update(ComboDto comboDto) {
-		Combo entity = new Combo(comboDto.getId(),
-				comboDto.getName(), 
-				comboDto.getPrice(), 
-				comboDto.getStep1(), 
-				comboDto.getStep2(), 
-				comboDto.getStep3(), 
-				comboDto.getStep4(), 
-				comboDto.getStep5());
+		Combo entity =  comboRes.getOne(comboDto.getId());
+		entity.setId(comboDto.getId());
+		entity.setName(comboDto.getName());
+		entity.setPrice(comboDto.getPrice());
+		entity.setStep1(comboDto.getStep1());
+		entity.setStep2(comboDto.getStep2());
+		entity.setStep3(comboDto.getStep3());
+		entity.setStep4(comboDto.getStep4());
+		entity.setStep5(comboDto.getStep5());
 		comboRes.save(entity);
 	}
 

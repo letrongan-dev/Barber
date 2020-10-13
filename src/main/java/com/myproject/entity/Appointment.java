@@ -11,17 +11,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity
 @Table(name = "appointment")
+@Entity
 public class Appointment {
 
-	@Column(name = "id")
+	@Column(name = "id", nullable = false)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(name = "code", nullable = false)
-	private String code;
 	
 	@Column(name = "date", nullable = false)
 	private Date date;
@@ -31,7 +28,7 @@ public class Appointment {
 	private String name;
 	
 	
-	@Column(name = "name_stylist", nullable = false)
+	@Column(name = "name_stylist")
 	private String nameStylist;
 	
 	
@@ -58,11 +55,10 @@ public class Appointment {
 		super();
 	}
 
-	public Appointment(int id, String code, Date date, String name, String nameStylist, String phone, String time,
+	public Appointment(int id, Date date, String name, String nameStylist, String phone, String time,
 			int comboId, String message, Combo combo) {
 		super();
 		this.id = id;
-		this.code = code;
 		this.date = date;
 		this.name = name;
 		this.nameStylist = nameStylist;
@@ -77,11 +73,11 @@ public class Appointment {
 
 
 
-	public Appointment(int id, String code, Date date, String name, String nameStylist, String phone, String time,
+	public Appointment(int id, Date date, String name, String nameStylist, String phone, String time,
 			int comboId, Combo combo) {
 		super();
 		this.id = id;
-		this.code = code;
+	
 		this.date = date;
 		this.name = name;
 		this.nameStylist = nameStylist;
@@ -91,10 +87,9 @@ public class Appointment {
 		this.combo = combo;
 	}
 
-	public Appointment(int id, String code, Date date, String name, String nameStylist, String phone, String time) {
+	public Appointment(int id, Date date, String name, String nameStylist, String phone, String time) {
 		super();
 		this.id = id;
-		this.code = code;
 		this.date = date;
 		this.name = name;
 		this.nameStylist = nameStylist;
@@ -111,27 +106,14 @@ public class Appointment {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-
-	public String getCode() {
-		return code;
-	}
-
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-
+	
 	public Date getDate() {
 		return date;
 	}
 
-
 	public void setDate(Date date) {
 		this.date = date;
 	}
-
 
 	public String getName() {
 		return name;

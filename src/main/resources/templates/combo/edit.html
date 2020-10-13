@@ -18,7 +18,9 @@
       		<div class="card">
       		<div class="card-body">
 	      		<h4 class="text-black text-center"><strong>Thêm mới combo</strong></h4>
-	      	<form method="post" th:action="@{/admin/combo/add}" th:object="${combo}" >
+	      	<form method="post" th:action="@{/admin/combo/edit}" th:object="${combo}" >
+	      	<input type="hidden" th:field="*{id}">
+	      	<p class="text-red text-center" th:text=${success}/>
 	          <div class="col-md-6 offset-md-3">
 	            <fieldset class="form-group">
 	              <label>Tên combo</label>
@@ -69,7 +71,7 @@
 	            </fieldset>
 	          </div>
 	          <div class="col-md-6 offset-md-3 text-center">
-	          	 <button type="submit" class="btn btn-success">Thêm</button>
+	          	 <button type="submit" class="btn btn-success">Cập nhật</button>
 	          	 <a th:href="@{/admin/combo}" class="btn btn-primary">Quay lại</a>
 	          </div>
 	         </form>
