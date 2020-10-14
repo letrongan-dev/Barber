@@ -137,6 +137,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 
+	@Override
+	public UserDto findByEmailAddress(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 //	@Override
 //	public UserDtoUpdate findDtoCode(String code) {
 //		UserDtoUpdate dtoUpdate = userRepository.findByCodeDto(code);

@@ -13,7 +13,6 @@ public class LoginController {
 	@GetMapping(value = "/login")
 	public String index(@RequestParam(value = "error" , defaultValue = "", required = false) String error , ModelMap model) {
 		if(!error.isEmpty()) {
-			System.err.println("error2");
 			model.addAttribute("error", "Sai thông tin đăng nhập");
 		}		
 		return "login";
