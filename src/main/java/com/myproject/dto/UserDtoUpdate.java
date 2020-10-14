@@ -2,14 +2,25 @@ package com.myproject.dto;
 
 import java.beans.Transient;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+
 public class UserDtoUpdate {
 
 	private int id;
 	private String code;
+	@NotEmpty(message = "Tên không được để trống!")
 	private String name;
+	
+	@NotEmpty( message = "Số điện thoại không được để trống")
 	private String phone;
-	private String email;
+	
+	
+	@NotEmpty(message = "Email không được để trống")
+	private String email;	
+	@NotEmpty(message = "Địa chỉ không được để trống")
 	private String address;
+
 	private int roleId;
 	private String avatar;
 	private String roleName;

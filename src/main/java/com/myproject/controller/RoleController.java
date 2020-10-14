@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myproject.dto.RoleDto;
 import com.myproject.service.RoleService;
@@ -38,12 +39,13 @@ public class RoleController {
 		return "role/add";
 	}
 	@PostMapping(value = "/role/add")
-	public String add(@Valid @ModelAttribute("role") RoleDto entity, BindingResult bindingResult, ModelMap model ) {
+	public String add(@Valid @ModelAttribute("role") RoleDto entity, BindingResult bindingResult, ModelMap model, RedirectAttributes ra ) {
 		if(bindingResult.hasErrors()) {
+			model.addAttribute("error", "Thêm thất bại!!");
 			return "role/add";
 		}else {
 			roleService.add(entity);
-			model.addAttribute("success", "Thêm thành công !!");
+			ra.addFlashAttribute("success", "Thêm thành công !!");
 			return "redirect:/admin/role";
 		}
 	}
@@ -54,23 +56,21 @@ public class RoleController {
 		return "role/edit";
 	}
 	@PostMapping(value = "/role/edit")
-	public String edit(@Valid @ModelAttribute("role") RoleDto entity, BindingResult bindingResult, ModelMap model) {
+	public String edit(@Valid @ModelAttribute("role") RoleDto entity, BindingResult bindingResult, RedirectAttributes model) {
 		if(bindingResult.hasErrors()) {
 			return "role/edit";
 		}else {
 			roleService.update(entity);
-			model.addAttribute("success", "Cập nhật thành công !!");
+			model.addFlashAttribute("success", "Cập nhật thành công !!");
 			return "redirect:/admin/role";
 		}
 	}
 	
 	@GetMapping(value = "role/delete")
-	public String delete(@RequestParam("id") int id, ModelMap model) {
+	public String delete(@RequestParam("id") int id, RedirectAttributes re) {
 		int result = roleService.delete(id);
-		if(result==1) {
-			model.addAttribute("success", "Xoá thành công");
-		}else {
-			model.addAttribute("error", "Xoá thất bại");
+		if(result==0) {
+			re.addFlashAttribute("empty", "Không có quyền cần xóa!!");
 		}
 		return "redirect:/admin/role";
 	}

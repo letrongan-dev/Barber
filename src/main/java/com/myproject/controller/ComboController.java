@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myproject.dto.ComboDto;
 import com.myproject.service.ComboService;
@@ -39,23 +40,23 @@ public class ComboController {
 	}
 	
 	@PostMapping(value = "/combo/add")
-	public String add(@Valid @ModelAttribute("combo") ComboDto dto, BindingResult bindingResult, ModelMap model) {
+	public String add(@Valid @ModelAttribute("combo") ComboDto dto, BindingResult bindingResult, RedirectAttributes re) {
 		if(bindingResult.hasErrors()) {
 			return "combo/add";
 		}else {
 			comboServ.add(dto);
-			model.addAttribute("success", "Thêm thành công !!");
+			re.addFlashAttribute("success", "Thêm thành công !!");
 			return "redirect:/admin/combo";
 		}
 	}
 	@GetMapping(value = "/combo/delete")
-	public String delete(@RequestParam("id") int id, ModelMap model) {
+	public String delete(@RequestParam("id") int id, RedirectAttributes re, ModelMap model) {
 		int result = comboServ.delete(id);
 		if(result==1) {
-			model.addAttribute("error", "Không tìm thấy !!");
+			model.addAttribute("empty", "Không tìm thấy !!");
 			return "combo/index";
 		}else {
-			model.addAttribute("succes", "Xóa thành công");
+			re.addFlashAttribute("succes", "Xóa thành công");
 			return "redirect:/admin/combo";
 		}
 	}
@@ -66,12 +67,13 @@ public class ComboController {
 		return "combo/edit";
 	}
 	@PostMapping(value = "/combo/edit")
-	public String update(@Valid @ModelAttribute("combo")ComboDto comboDto, BindingResult bindingResult, ModelMap model) {
+	public String update(@Valid @ModelAttribute("combo")ComboDto comboDto, BindingResult bindingResult, ModelMap model, RedirectAttributes re) {
 		if(bindingResult.hasErrors()) {
+			model.addAttribute("error", "Update thất bại!!");
 			return "combo/edit";
 		}else {
 			comboServ.update(comboDto);
-			model.addAttribute("success", "Update thành công !!");
+			re.addFlashAttribute("success", "Update thành công !!");
 			return "redirect:/admin/combo";
 		}
 	}

@@ -2,15 +2,33 @@ package com.myproject.dto;
 
 import java.beans.Transient;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+
 public class UserDto {
 
 	private int id;
 	private String code;
+	@NotEmpty(message = "Tên không được để trống!")
 	private String name;
+	
+	@NotEmpty( message = "Số điện thoại không được để trống")
+	@Pattern(regexp = "[7-9][0-9]{9}", message = "Số điện thoại phải là số 0-9")
 	private String phone;
+	
+	
+	@NotEmpty(message = "Email không được để trống")
 	private String email;
+	
+	
+	@NotEmpty(message = "Password không được để trống")
+	@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$"
+	, message = "Mật khẩu có ít nhất 8 ký tự có ít nhất(1 chữ IN HOA, 1 chữ cái thường, 1 ký tự đặc biệt và không có khoảng trắng )")
 	private String password;
+	
+	@NotEmpty(message = "Địa chỉ không được để trống")
 	private String address;
+	
 	private int roleId;
 	private String avatar;
 	private String roleName;

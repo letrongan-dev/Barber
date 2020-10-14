@@ -23,7 +23,7 @@
     <div class="container">
     	<div class="row justify-content-center pb-3">
         <div class="col-md-10 heading-section text-center ftco-animate">
-        <p class="text-success text center" th:text="${success}"></p>
+        <h1 class="alert-success text center" th:text="${success}"></h1>
         	<span class="subheading">Services</span>
           <h2 class="mb-4">Services Menu</h2>
           <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
@@ -116,19 +116,19 @@
              <div class="col-sm-6">
                <div class="form-group">
 	              <input type="text" class="form-control" id="appointment_name" name="name" placeholder="Name" th:field="*{name}">
-	              <p class="alert alert-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" />
+	              <span class="text-danger text-italic" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
 	            </div>
              </div>
              <div class="col-sm-6">
                <div class="form-group">
                  <input type="date" name="date" placeholder="Date" th:field="*{date}">
-                 <p class="alert alert-danger" th:if="${#fields.hasErrors('date')}" th:errors="*{date}" />
+                 <span class="text-danger text-italic" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span>
                </div>    
              </div>
              <div class="col-sm-6">
                <div class="form-group">
                  <input type="text" class="form-control appointment_time" name="time" placeholder="Time" th:field="*{time}">
-                 <p class="alert alert-danger" th:if="${#fields.hasErrors('time')}" th:errors="*{time}" />
+                <span class="text-danger text-italic" th:if="${#fields.hasErrors('time')}" th:errors="*{time}"></span>
                </div>
              </div>
              <div class="col-sm-6">
@@ -139,19 +139,19 @@
 	                  	<option th:each="item: ${combos}" th:value="${item.id}" th:text="${item.name}">Professional Makeup</option>
 	                  </select>
 	                </div>
-	              <p class="alert alert-danger" th:if="${#fields.hasErrors('comboId')}" th:errors="*{comboId}" />
+	              <span class="text-danger text-italic" th:if="${#fields.hasErrors('comboId')}" th:errors="*{comboId}"></span>
 	            </div>
              </div>
              <div class="col-sm-6">
                <div class="form-group">
                  <input type="text" class="form-control" id="phone" placeholder="Phone" th:field="*{phone}"> 
-                 <p class="alert alert-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" />
+                 <span class="text-danger text-italic" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
                </div>
              </div>
              <div class="col-md-12">
              	<div class="form-group">
                 <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message" th:field="*{message}"></textarea>
-                <p class="alert alert-danger" th:if="${#fields.hasErrors('message')}" th:errors="*{message}" />
+                <span class="text-danger text-italic" th:if="${#fields.hasErrors('message')}" th:errors="*{message}"></span>
               </div>
              </div>
           </div>
@@ -164,11 +164,16 @@
   	</div>
   </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript">
-	function myFunction() {
-	  var comboName = document.getElementById("nameCombo").innerHTML;
-	  document.getElementById("comboName").value = comboName;
+<script th:inline="javascript" layout:fragment="js">
+/*<![CDATA[*/
+	var success = /*[[${success}]]*/ 'default';
+	var error = /*[[${error}]]*/ 'default';
+	if(success){
+		swal("Thành công!", success, "success");
+	}else if(error){
+		swal("Thất bại!", error, "error");
 	}
-</script>
+/*]]>*/
+</script>	
 </body>
 </html>

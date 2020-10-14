@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myproject.dto.RoleDto;
 import com.myproject.dto.UserDto;
@@ -34,9 +35,7 @@ public class UserController {
 	
 	@Autowired
 	private RoleService roleService;
-	
-//	@Autowired
-//	private FileService fileService;
+
 	
 	@GetMapping(value = "/user")
 	public String index(ModelMap model) {
@@ -55,20 +54,17 @@ public class UserController {
 		model.addAttribute("roles", roles);
 		return "user/add";
 	}
-//	@PostMapping(value = "/user/add")
-//	public String add(@Valid @ModelAttribute("user") UserDto userDto, 
-//			HttpServletRequest request,
-//			@ModelAttribute("myfile") MyFile myFile, 
-//			BindingResult bindingResult) {
-//		fileService.uploadFile(myFile,request);
-//		userDto.setAvatar(myFile.getMultipartFile().getOriginalFilename());
-//		userService.add(userDto);
-//		return "redirect:/admin/user.html";
-//	}
+	
 	@PostMapping("/users/save")
-    public String saveUser(UserDto userDto,
-            @RequestParam("image") MultipartFile multipartFile) throws IOException {
-         
+    public String saveUser(@Valid @ModelAttribute("user") UserDto userDto, BindingResult bindingResult,
+            @RequestParam("image") MultipartFile multipartFile,  RedirectAttributes re, ModelMap model) throws IOException {
+        
+		if(bindingResult.hasErrors() && multipartFile.isEmpty()) {
+			List<RoleDto> roles = roleService.getAll();
+			model.addAttribute("roles", roles);
+			return "user/add";
+		}
+		else {
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         userDto.setAvatar(fileName);
          
@@ -77,17 +73,18 @@ public class UserController {
         String uploadDir = "user-photos/";
  
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-         
+        re.addFlashAttribute("success", "Thêm thành công!");
         return "redirect:/admin/user";
+		}
     }
 	
 	@GetMapping(value = "/user/delete")
-	public String delete(@RequestParam("id") int id, ModelMap model) {
+	public String delete(@RequestParam("id") int id, RedirectAttributes model) {
 		int result = userService.delete(id);
 		if(result == 1) {
-			model.addAttribute("success", "Xóa thành công !");
+			model.addFlashAttribute("success", "Xóa thành công !");
 		}else {
-			model.addAttribute("error", "Xóa thất bại!");
+			model.addFlashAttribute("error", "Xóa thất bại!");
 		}
 		return "redirect:/admin/user";
 	}
@@ -102,18 +99,28 @@ public class UserController {
 	}
 	
 	@PostMapping("/users/edit")
-    public String updateUser(UserDtoUpdate userDtoUpdate
-    		,
-            @RequestParam("image") MultipartFile multipartFile) throws IOException {
-         
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        if(!fileName.isEmpty()) {
-        	String uploadDir = "/user-photos/";
-	        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-	    	userDtoUpdate.setAvatar(fileName);
-	        userService.edit(userDtoUpdate);
+    public String updateUser(@Valid @ModelAttribute("user") UserDtoUpdate userDtoUpdate, BindingResult bindingResult,
+            @RequestParam("image") MultipartFile multipartFile,  RedirectAttributes re, ModelMap model) throws IOException {
+        if(bindingResult.hasErrors() && multipartFile.isEmpty()) {
+        	List<RoleDto> roles = roleService.getAll();
+			model.addAttribute("roles", roles);
+			return "user/edit";
+        } else if(multipartFile.getSize()!=0) {
+        	String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+            userDtoUpdate.setAvatar(fileName); 
+            userService.edit(userDtoUpdate);
+            String uploadDir = "user-photos/";
+            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+            re.addFlashAttribute("success", "Cập nhật thành công!");
+            return "redirect:/admin/user";
+        }else {
+        	userDtoUpdate.setAvatar(userService.findById(userDtoUpdate.getId()).getAvatar());
+        	userService.edit(userDtoUpdate);
+        	re.addFlashAttribute("success", "Cập nhật thành công!");
+            return "redirect:/admin/user";
         }
-        return "redirect:/admin/user";
+        
+        
     }
 }
 	

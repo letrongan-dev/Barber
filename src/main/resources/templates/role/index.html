@@ -57,7 +57,19 @@
 	</div>
 </div>
 
-<script type="text/javascript" layout:fragment="jscript">
+<script th:inline="javascript" layout:fragment="jscript">
+/*<![CDATA[*/
+var success = /*[[${success}]]*/ 'default';
+var error = /*[[${error}]]*/ 'default';
+var empty = /*[[${empty}]]*/ 'default';
+if(success){
+	swal("Thành công!", success, "success");
+}else if(error){
+	swal("Thất bại!", error, "error");
+}else if(empty){
+	swal("Thất bại!", empty, "warning");
+}
+/*]]>*/
 $(document).ready(function(){
     $('[data-confirm]').on('click', function(e){
         e.preventDefault(); //cancel default action
@@ -73,11 +85,10 @@ $(document).ready(function(){
             icon: "warning",
             buttons: true,
             dangerMode: true,
-            timer:1200,
         })
         .then((willDelete) => {
           if (willDelete) {
-            swal("Poof! Your imaginary file has been deleted!", {
+            swal("Xóa thành công!!", {
               icon: "success",
              
             });
@@ -85,7 +96,11 @@ $(document).ready(function(){
           }
         });
     });
+    
 });
 </script>
+
+
+
 </body>
 </html>

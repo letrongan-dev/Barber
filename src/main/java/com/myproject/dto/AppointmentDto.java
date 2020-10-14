@@ -3,7 +3,7 @@ package com.myproject.dto;
 
 import java.util.Date;
 
-
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -16,17 +16,18 @@ public class AppointmentDto {
 	private int id;
 	
 	@DateTimeFormat(pattern = "yyyy-mm-dd")
+	@NotNull(message = "Vui lòng chọn ngày")
 	private Date date;
 	
-	@NotNull(message = "Tên không được để trống")
+	@NotEmpty(message = "Tên không được để trống")
 	private String name;
 	
 	private String nameStylist;
 	
-	@NotNull(message = "Vui lòng nhập số điện thoại")
+	@NotEmpty(message = "Vui lòng nhập số điện thoại")
 	private String phone;
 	
-	@NotNull(message = "Vui lòng nhập thời gian")
+	@NotEmpty(message = "Vui lòng nhập thời gian")
 	private String time;
 	
 	private String message;
