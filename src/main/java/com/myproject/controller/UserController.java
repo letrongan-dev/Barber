@@ -58,10 +58,15 @@ public class UserController {
 	@PostMapping("/users/save")
     public String saveUser(@Valid @ModelAttribute("user") UserDto userDto, BindingResult bindingResult,
             @RequestParam("image") MultipartFile multipartFile,  RedirectAttributes re, ModelMap model) throws IOException {
-        
+        int result = userService.checkExist(userDto.getEmail());
 		if(bindingResult.hasErrors() && multipartFile.isEmpty()) {
 			List<RoleDto> roles = roleService.getAll();
 			model.addAttribute("roles", roles);
+			return "user/add";
+		}else if(result>0) {
+			List<RoleDto> roles = roleService.getAll();
+			model.addAttribute("roles", roles);
+			model.addAttribute("warning", "Email này đã được đăng ký!!");
 			return "user/add";
 		}
 		else {

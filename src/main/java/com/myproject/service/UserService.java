@@ -17,5 +17,5 @@ public interface UserService {
 	UserDtoUpdate findById(int id);
 	String hashPassword(String password);
 	String generateRandom(int len);
-	UserDto findByEmailAddress(String email);
+	int checkExist(String email);
 }

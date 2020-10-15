@@ -13,7 +13,7 @@ public class UserDto {
 	private String name;
 	
 	@NotEmpty( message = "Số điện thoại không được để trống")
-	@Pattern(regexp = "[7-9][0-9]{9}", message = "Số điện thoại phải là số 0-9")
+	@Pattern(regexp = "^\\d{10}$", message = "Số điện thoại phải là số 0-9")
 	private String phone;
 	
 	

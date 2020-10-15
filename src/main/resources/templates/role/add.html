@@ -36,14 +36,21 @@
 	          </div>
 	          <div class="col-md-6 offset-md-3 text-center">
 	          	 <button type="submit" class="btn btn-success">Thêm</button>
-	          	 <a th:href="@{/admin/role.html}" class="btn btn-primary">Quay lại</a>
+	          	 <a th:href="@{/admin/role}" class="btn btn-primary">Quay lại</a>
 	          </div>
 	         </form>
 	      	</div>
 	    	</div>
 		</div>
 </div>
-
+<script th:inline="javascript" layout:fragment="jscript">
+/*<![CDATA[*/
+var warning = /*[[${warning}]]*/ 'default';
+if(warning){
+	swal("Cảnh báo!", warning, "warning");
+}
+/*]]>*/
+</script>
 
 	
 </body>

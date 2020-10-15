@@ -82,6 +82,13 @@
   	</div>
 	</div>
 </div>
-
+<script th:inline="javascript" layout:fragment="jscript">
+/*<![CDATA[*/
+var warning = /*[[${warning}]]*/ 'default';
+if(warning){
+	swal("Cảnh báo!", warning, "warning");
+}
+/*]]>*/
+</script>
 </body>
 </html>

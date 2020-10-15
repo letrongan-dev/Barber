@@ -10,4 +10,5 @@ import com.myproject.entity.Role;
 public interface RoleRepository extends JpaRepository<Role, Integer> {
 	Role findById(int id);
 	Role findByName(String name);
+	int countByName(String name);
 }

@@ -40,8 +40,11 @@ public class RoleController {
 	}
 	@PostMapping(value = "/role/add")
 	public String add(@Valid @ModelAttribute("role") RoleDto entity, BindingResult bindingResult, ModelMap model, RedirectAttributes ra ) {
+		int resultExist = roleService.checkExist(entity.getName());
 		if(bindingResult.hasErrors()) {
-			model.addAttribute("error", "Thêm thất bại!!");
+			return "role/add";
+		}else if(resultExist > 0){
+			model.addAttribute("warning", "Tên quyền đã tồn tại!!");
 			return "role/add";
 		}else {
 			roleService.add(entity);

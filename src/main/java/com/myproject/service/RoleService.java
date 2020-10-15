@@ -15,4 +15,6 @@ public interface RoleService {
 	RoleDto findById(int id);
 	
 	int delete(int id);
+
+	int checkExist(String name);
 }

@@ -67,6 +67,14 @@ public class RoleServiceImpl implements RoleService {
 			return 0;
 		}
 	}
-	
-
+	@Override
+	public int checkExist(String name) {
+		int result = roleRepository.countByName(name);
+		if(result>0) {
+			return 1;
+		}else {
+			return 0;
+		}
+	}
+		
 }

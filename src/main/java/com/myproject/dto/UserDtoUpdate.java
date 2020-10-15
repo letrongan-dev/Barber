@@ -13,6 +13,7 @@ public class UserDtoUpdate {
 	private String name;
 	
 	@NotEmpty( message = "Số điện thoại không được để trống")
+	@Pattern(regexp = "^\\d{10}$", message = "Số điện thoại phải là số 0-9")
 	private String phone;
 	
 	

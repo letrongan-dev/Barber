@@ -135,20 +135,16 @@ public class UserServiceImpl implements UserService {
 			return 0;
 		}
 	}
-
-
+	
 	@Override
-	public UserDto findByEmailAddress(String email) {
-		// TODO Auto-generated method stub
-		return null;
+	public int checkExist(String email) {
+		int result = userRepository.countByEmail(email);
+		if(result>0) {
+			return 1;
+		}else {
+			return 0;
+		}
 	}
 
-
-//	@Override
-//	public UserDtoUpdate findDtoCode(String code) {
-//		UserDtoUpdate dtoUpdate = userRepository.findByCodeDto(code);
-////		User entity = new User(dtoUpdate.getCode(), dtoUpdate.getName(), dtoUpdate.getRoleId(), dtoUpdate.getEmail(), dtoUpdate.getAddress(), dtoUpdate.getPhone(), dtoUpdate.getAvatar());
-//		return dtoUpdate;
-//	}
 
 }
