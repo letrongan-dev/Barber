@@ -62,9 +62,9 @@
         </div>
         <div class="col-md-6 offset-md-3">
         <h5 class="text-black">ROLE</h5>
-	<select th:field="*{roleId}" class="form-control form-control-line" >
-		<option th:each="item : ${roles}" th:value="${item.id}"  th:text="${item.name}"></option>
-	</select>
+		<select th:field="*{roleId}" class="form-control form-control-line" >
+			<option th:each="item : ${roles}" th:value="${item.id}"  th:text="${item.name}"></option>
+		</select>
             <span class="text-danger font-italic" th:if="${#fields.hasErrors('avatar')}" th:errors="*{avatar}">Full name error</span>
         </div>
         <div class="col-md-6 offset-md-3 text-center mt-4">

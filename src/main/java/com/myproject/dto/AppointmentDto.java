@@ -15,7 +15,7 @@ public class AppointmentDto {
 	
 	private int id;
 	
-	@DateTimeFormat(pattern = "yyyy-mm-dd")
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) 
 	@NotNull(message = "Vui lòng chọn ngày")
 	private Date date;
 	
@@ -34,6 +34,8 @@ public class AppointmentDto {
 	
 	@NotNull(message = "Vui lòng chọn combo")
 	private int comboId;
+	
+	private int stylistId;
 
 	public AppointmentDto() {
 		
@@ -49,6 +51,19 @@ public class AppointmentDto {
 		this.time = time;
 		this.message = message;
 		this.comboId = comboId;
+	}
+	
+	
+	public AppointmentDto(int id, Date date, String name, String phone, String time, String message, int comboId, int stylistId) {
+		super();
+		this.id = id;
+		this.date = date;
+		this.name = name;
+		this.phone = phone;
+		this.time = time;
+		this.message = message;
+		this.comboId = comboId;
+		this.stylistId = stylistId;
 	}
 	public int getId() {
 		return id;
@@ -118,5 +133,11 @@ public class AppointmentDto {
 	}
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	public int getStylistId() {
+		return stylistId;
+	}
+	public void setStylistId(int stylistId) {
+		this.stylistId = stylistId;
 	}
 }

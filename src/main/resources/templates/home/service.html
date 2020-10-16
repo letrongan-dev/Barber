@@ -163,15 +163,12 @@
   		</div>
   	</div>
   </section>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script th:inline="javascript" layout:fragment="js">
 /*<![CDATA[*/
-	var success = /*[[${success}]]*/ 'default';
-	var error = /*[[${error}]]*/ 'default';
-	if(success){
-		swal("Thành công!", success, "success");
-	}else if(error){
-		swal("Thất bại!", error, "error");
+	var warning = /*[[${warning}]]*/ 'default';
+	if(warning){
+		swal("Thông báo!", warning, "warning");
 	}
 /*]]>*/
 </script>	

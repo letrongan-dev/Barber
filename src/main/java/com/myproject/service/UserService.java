@@ -18,4 +18,5 @@ public interface UserService {
 	String hashPassword(String password);
 	String generateRandom(int len);
 	int checkExist(String email);
+	List<UserDto> listStylist();
 }

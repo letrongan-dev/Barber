@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorator="layout/backend/default">
+<head>
+<meta charset="UTF-8">
+<title>ADMIN | APPOINTMENT</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="content-header sty-two">
+      <ol class="breadcrumb">
+        <li><a href="#"><strong>ADMIN</strong></a></li>
+        <li><i class="fa fa-angle-right"></i> <a href="#"><strong>Update Stylist</strong></a></li>
+      </ol>
+    </div>
+   <div class="content">
+   		<div class="card">
+   		<div class="card-body">
+    		<h4 class="text-black text-center"><strong>Update Stylist</strong></h4>
+    	<form method="post" th:action="@{/admin/appointment/update}" th:object="${app}">
+    	<input class="form-control" type="hidden" th:field="*{id}">
+    	<div class="col-md-6 offset-md-3" th:if="${app.nameStylist==null}">
+        	<label>Stylist</label>
+           	<select class="form-control" th:field="*{stylistId}">
+              	<option th:each="item : ${stylists}" th:value="${item.id}"  th:text="${item.name}"></option>
+            </select>
+        </div>
+    	<div class="col-md-6 offset-md-3" th:if="${app.nameStylist!=null}">
+        	<label>Stylist</label>
+           	<select class="form-control" disabled>
+              	<option th:each="item : ${stylists}" 
+              			th:if="${app.nameStylist} == ${item.name}"
+              			th:text="${item.name}"></option>
+            </select>
+        </div>
+    	<div class="col-md-6 offset-md-3">
+    	<input type="hidden" th:field="*{id}" readonly>
+          <fieldset class="form-group">
+            <label>Date</label>
+            <input class="form-control" type="text" th:field="*{date}" readonly>
+          </fieldset>
+        </div>
+        <div class="col-md-6 offset-md-3">
+          <fieldset class="form-group">
+            <label>Time</label>
+            <input class="form-control" type="text" th:field="*{time}" readonly>
+          </fieldset>
+        </div>
+        <div class="col-md-6 offset-md-3">
+          <fieldset class="form-group">
+            <label>Phone</label>
+            <input class="form-control" type="text" th:field="*{phone}" readonly>
+          </fieldset>
+        </div>
+        <div class="col-md-6 offset-md-3">
+          <fieldset class="form-group">
+            <label>Name</label>
+            <input class="form-control" type="text" th:field="*{name}" readonly>
+          </fieldset>
+        </div>
+        <div class="col-md-6 offset-md-3">
+          <fieldset class="form-group">
+            <label>Message</label>
+            <input class="form-control" type="text" th:field="*{message}" readonly>
+          </fieldset>
+        </div>
+        <div class="col-md-6 offset-md-3">
+          <fieldset class="form-group">
+          	<label>Combo</label>
+            <select th:field="*{comboId}" class="form-control form-control-line" disabled>
+				<option th:each="item : ${combos}" th:value="${item.id}"  th:text="${item.name}"></option>
+			</select>
+          </fieldset>
+        </div>
+        <div class="col-md-6 offset-md-3 text-center mt-4">
+        	 <button type="submit" class="btn btn-success">Cập nhật</button>
+        	 <a th:href="@{/admin/appointment}" class="btn btn-primary">Quay lại</a>
+        </div>
+       </form>
+    	</div>
+  	</div>
+	</div>
+</div>
+<script th:inline="javascript" layout:fragment="jscript">
+/*<![CDATA[*/
+var empty = /*[[${empty}]]*/ 'default';
+var error = /*[[${error}]]*/ 'default'
+if(empty){
+	swal("Cảnh báo!", empty, "warning");
+}else if(error){
+	swal("Thất bại!", error, "error");
+}
+/*]]>*/
+</script>
+</body>
+</html>

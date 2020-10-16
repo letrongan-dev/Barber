@@ -147,4 +147,15 @@ public class UserServiceImpl implements UserService {
 	}
 
 
+	@Override
+	public List<UserDto> listStylist() {
+		List<User> list = userRepository.listStylist(3);
+		List<UserDto> stylist = new ArrayList<UserDto>();
+		for(User u : list) {
+			stylist.add(entityChangeToDto(u));
+		}
+		return stylist;
+	}
+
+
 }
