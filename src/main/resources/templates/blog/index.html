@@ -4,7 +4,7 @@
 	  layout:decorator="layout/backend/default">
 <head>
 <meta charset="UTF-8">
-<title>Danh sách người dùng</title>
+<title>Danh sách bài viết</title>
 </head>
 <body>
 <div layout:fragment="content">
@@ -12,7 +12,7 @@
 <h1> Danh sách Blog</h1>
   <ol class="breadcrumb mb-4">
     <li><a href="#">ADMIN</a></li>
-    <li><i class="fa fa-angle-right"></i> <a href="#">Danh sách Blog</a></li>
+    <li><i class="fa fa-angle-right"></i> <a href="#">Danh sách bài viết</a></li>
   </ol>
 </div>
 <div class="content">
@@ -21,32 +21,29 @@
 	<div class="col-md-12">
       <div class="table-responsive mt-4">
         <table class="table">
-        	<a th:href="@{/admin/user/add}" class="btn btn-success text-white float-right">+ Thêm mới</a>
+        	<a th:href="@{/admin/blog/add}" class="btn btn-success text-white float-right">+ Thêm mới</a>
           <thead class="bg-info text-white">
             <tr>
             <th scope="col">STT</th>
               <th scope="col">Date</th>
+              <th scope="col">IMAGE</th>
               <th scope="col">Title</th>
               <th scope="col">Description</th>
-              <th scope="col">IMAGE</th>
               <th scope="col">STATUS</th>
               <th scope="col">#</th>
             </tr>
           </thead>
           <tbody>
 	          <tr th:if="${blogs == null || blogs.empty}">
-	            	<td colspan="8" class="text-center">No Available</td>
+	            	<td colspan="7" class="text-center">No Available</td>
 	          </tr>
             <tr th:each="item: ${blogs}">
-            <td><img alt="" th:src="@{${item.photosImagePath}}" style="height:70px; width:70px"></td>
-              <td th:text="${item.code}">A101</td>
-              <td th:text="${item.name}">Mark</td>
-              <td th:text="${item.phone}">090908561</td>
-              <td th:text="${item.email}">admin@gmail.com</td>
-              <td th:text="${item.address}">Tphcm</td>
-              <td   th:each="itemRole: ${roles}" 
-      				th:if="${itemRole.id} == ${item.roleId}"
-              		th:text="${itemRole.desc}">1</td>
+              <td th:text="${item.id}">A101</td>
+              <td th:text="${item.date}">Mark</td>
+              <td><img alt="" th:src="@{${item.imagePhotoPath}}" style="width: 70px; height: 70px"></td>
+              <td th:text="${item.title}">090908561</td>
+              <td th:text="${item.description}">admin@gmail.com</td>
+              <td th:text="${item.status}">Tphcm</td>
               <td>
                    <a th:href="@{/admin/user/edit(id=${item.id})}" class="btn btn-sm btn-info">
                        <i class="fa fa-pencil-square-o"></i>

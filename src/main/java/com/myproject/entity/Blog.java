@@ -31,7 +31,7 @@ public class Blog {
 	@Column(name = "img_blog", nullable = false)
 	private String imgBlog;	
 	
-	@Column(name = "description", nullable = false)
+	@Column(name = "description", length = 100, nullable = false)
 	private String description;
 	
 	@Lob 
@@ -52,7 +52,7 @@ public class Blog {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedAt;
 
-	@Column(name="status", length = 1)
+	@Column(name="status", columnDefinition = "integer default 0", length = 1 )
 	private int status;
 
 	public Blog() {}

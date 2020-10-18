@@ -14,7 +14,7 @@ public class UserDetailsDto extends User {
 	public UserDetailsDto(String username, String password, Collection<? extends GrantedAuthority> authorities, String fullname, String avatar) {
 		super(username, password, authorities);
 		this.fullname = fullname;
-		this.avatar = "/user-photos/"+avatar;
+		this.avatar = "/upload/user/"+avatar;
 	}
 	public String getFullname() {
 		return fullname;

@@ -1,11 +1,14 @@
 package com.myproject.dto;
 
+
+import java.beans.Transient;
 import java.util.Date;
+
 
 import javax.validation.constraints.NotNull;
 
 
-public class BlogDto {
+public class BlogDto{
 
 	private int id;
 	
@@ -25,6 +28,8 @@ public class BlogDto {
 	private Date created_at;
 	private Date updatedAt;
 	private int status;
+	private String imagePhotoPath;
+	
 	
 	public BlogDto() {
 		super();
@@ -45,6 +50,7 @@ public class BlogDto {
 		this.status = status;
 	}
 
+	
 	public int getId() {
 		return id;
 	}
@@ -70,7 +76,7 @@ public class BlogDto {
 	}
 
 	public String getImgBlog() {
-		return imgBlog;
+		return  imgBlog;
 	}
 
 	public void setImgBlog(String imgBlog) {
@@ -124,4 +130,14 @@ public class BlogDto {
 	public void setStatus(int status) {
 		this.status = status;
 	}
+
+	public String getImagePhotoPath() {
+		return imagePhotoPath;
+	}
+
+	public void setImagePhotoPath(String imagePhotoPath) {
+		this.imagePhotoPath = imagePhotoPath;
+	}
+	
+	
 }

@@ -51,7 +51,6 @@ public class User {
 	@JoinColumn(name = "role_id",insertable = false, updatable = false)
 	private Role role;
 	
-	private boolean enabled;
 	
 	public User() {};
 
@@ -158,10 +157,5 @@ public class User {
 
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
-	}
-
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 }

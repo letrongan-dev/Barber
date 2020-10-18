@@ -154,6 +154,6 @@ public class UserDto {
     public String getPhotosImagePath() {
         if (avatar == null) return null;
          
-        return "/user-photos/" + avatar;
+        return "/upload/user/" + avatar;
     }
 }

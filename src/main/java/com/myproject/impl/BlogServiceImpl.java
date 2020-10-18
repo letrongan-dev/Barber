@@ -62,6 +62,7 @@ public class BlogServiceImpl implements BlogService{
 		dto.setImgBlog(entity.getImgBlog());
 		dto.setStatus(entity.getStatus());
 		dto.setDate(entity.getDate());
+		dto.setImagePhotoPath("/upload/blog/"+entity.getImgBlog());
 		return dto;
 	}
 	public Blog dtoChangeEntity(BlogDto dto) {

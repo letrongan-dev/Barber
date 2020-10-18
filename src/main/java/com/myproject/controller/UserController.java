@@ -75,7 +75,7 @@ public class UserController {
          
         userService.add(userDto);
  
-        String uploadDir = "user-photos/";
+        String uploadDir = "upload/user";
  
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
         re.addFlashAttribute("success", "Thêm thành công!");
@@ -114,7 +114,7 @@ public class UserController {
         	String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
             userDtoUpdate.setAvatar(fileName); 
             userService.edit(userDtoUpdate);
-            String uploadDir = "user-photos/";
+            String uploadDir = "upload/user";
             FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
             re.addFlashAttribute("success", "Cập nhật thành công!");
             return "redirect:/admin/user";
