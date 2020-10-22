@@ -11,5 +11,6 @@ public interface BlogService {
 	void add (BlogDto blogDto);
 	BlogDto findById(int id);
 	int delete(int id);
-	void edit(int id);
+	void edit(BlogDto dto);
+	int activeBlog (BlogDto dto);
 }

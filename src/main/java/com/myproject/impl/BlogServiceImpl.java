@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.myproject.dto.BlogDto;
+import com.myproject.dto.BlogDtoActive;
 import com.myproject.entity.Blog;
 import com.myproject.reponsitory.BlogRepository;
 import com.myproject.service.BlogService;
@@ -36,8 +37,9 @@ public class BlogServiceImpl implements BlogService{
 
 	@Override
 	public BlogDto findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Blog entity = blogResp.getOne(id);
+		BlogDto dto = entityChangeDto(entity);
+		return dto;
 	}
 
 	@Override
@@ -47,8 +49,16 @@ public class BlogServiceImpl implements BlogService{
 	}
 
 	@Override
-	public void edit(int id) {
-		// TODO Auto-generated method stub
+	public void edit(BlogDto dto) {
+		Blog entity = blogResp.getOne(dto.getId());
+		entity.setId(dto.getId());
+		entity.setTitle(dto.getTitle());
+		entity.setContent(dto.getContent());
+		entity.setSlug(dto.getSlug());
+		entity.setDescription(dto.getDescription());
+		entity.setImgBlog(dto.getImgBlog());
+		entity.setStatus(dto.getStatus());
+		blogResp.save(entity);
 		
 	}
 	
@@ -76,6 +86,19 @@ public class BlogServiceImpl implements BlogService{
 		entity.setStatus(dto.getStatus());
 		entity.setDate(dto.getDate());
 		return entity;
+	}
+
+	@Override
+	public int activeBlog(BlogDto dto) {
+		Blog entity = blogResp.getOne(dto.getId());
+		entity.setStatus(dto.getStatus());
+		entity.setContent(entity.getContent());
+		entity.setSlug(entity.getSlug());
+		entity.setTitle(entity.getTitle());
+		entity.setDescription(entity.getDescription());
+		entity.setImgBlog(entity.getImgBlog());
+		blogResp.save(entity);
+		return 0;
 	}
 
 }

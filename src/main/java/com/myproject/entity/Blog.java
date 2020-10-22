@@ -31,7 +31,7 @@ public class Blog {
 	@Column(name = "img_blog", nullable = false)
 	private String imgBlog;	
 	
-	@Column(name = "description", length = 100, nullable = false)
+	@Column(name = "description", length = 300, nullable = false)
 	private String description;
 	
 	@Lob 

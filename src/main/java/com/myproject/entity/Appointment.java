@@ -68,11 +68,6 @@ public class Appointment {
 		this.message = message;
 		this.combo = combo;
 	}
-
-
-
-
-
 	public Appointment(int id, Date date, String name, String nameStylist, String phone, String time,
 			int comboId, Combo combo) {
 		super();

@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.csrf().disable()
 		.antMatcher("/**") //Kiểm tra với URL bắt đầu bằng /
 		.authorizeRequests()//Phân quyền
-		.antMatchers("/login","/","/service","/appointment")
+		.antMatchers("/login","/","/service","/appointment","/blog**")
 		.permitAll()
 		.antMatchers("/admin/**")
 		.hasAnyRole("ADMINISTRATOR","MANAGER")

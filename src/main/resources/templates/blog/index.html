@@ -1,105 +1,155 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorator="layout/backend/default">
+	  layout:decorator="layout/frontend/default">
 <head>
 <meta charset="UTF-8">
-<title>Danh sách bài viết</title>
+<title>HAIR-CARE</title>
 </head>
 <body>
 <div layout:fragment="content">
-<div class="content-header sty-one">
-<h1> Danh sách Blog</h1>
-  <ol class="breadcrumb mb-4">
-    <li><a href="#">ADMIN</a></li>
-    <li><i class="fa fa-angle-right"></i> <a href="#">Danh sách bài viết</a></li>
-  </ol>
-</div>
-<div class="content">
-   <div class="card">
-   <div class="card-body">
-	<div class="col-md-12">
-      <div class="table-responsive mt-4">
-        <table class="table">
-        	<a th:href="@{/admin/blog/add}" class="btn btn-success text-white float-right">+ Thêm mới</a>
-          <thead class="bg-info text-white">
-            <tr>
-            <th scope="col">STT</th>
-              <th scope="col">Date</th>
-              <th scope="col">IMAGE</th>
-              <th scope="col">Title</th>
-              <th scope="col">Description</th>
-              <th scope="col">STATUS</th>
-              <th scope="col">#</th>
-            </tr>
-          </thead>
-          <tbody>
-	          <tr th:if="${blogs == null || blogs.empty}">
-	            	<td colspan="7" class="text-center">No Available</td>
-	          </tr>
-            <tr th:each="item: ${blogs}">
-              <td th:text="${item.id}">A101</td>
-              <td th:text="${item.date}">Mark</td>
-              <td><img alt="" th:src="@{${item.imagePhotoPath}}" style="width: 70px; height: 70px"></td>
-              <td th:text="${item.title}">090908561</td>
-              <td th:text="${item.description}">admin@gmail.com</td>
-              <td th:text="${item.status}">Tphcm</td>
-              <td>
-                   <a th:href="@{/admin/user/edit(id=${item.id})}" class="btn btn-sm btn-info">
-                       <i class="fa fa-pencil-square-o"></i>
-                   </a>
-                   <a data-confirm='Bạn thật sự muốn xóa user này ?'
-                    th:href="@{/admin/user/delete(id=${item.id})}" class="btn btn-sm btn-danger">
-                       <i class="fa fa-trash-o"></i>
-                   </a>
-               </td>
-            </tr>
-          </tbody>
-        </table>
+<section class="hero-wrap hero-wrap-2" th:style="'background-image:url(' + @{/frontend/images/bg-1.jpg} + ');'" data-stellar-background-ratio="0.5">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
+      <div class="col-md-9 ftco-animate pb-5 text-center">
+        <h2 class="mb-0 bread">Blog</h2>
+        <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-round-forward"></i></a></span> <span>Blog <i class="ion-ios-arrow-round-forward"></i></span></p>
       </div>
     </div>
-	</div>
-	</div>
-	</div>
+  </div>
+</section>
+
+<section class="ftco-section ftco-degree-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 ftco-animate">
+		<div class="row">
+			<div class="col-md-12 d-flex ftco-animate" th:each="item: ${blogs}">
+          <div class="blog-entry align-self-stretch d-md-flex">
+            <a th:href="@{/blog/detail(id=${item.id})}" class="block-20" th:style="'background-image:url(' + @{${item.imagePhotoPath}} + ');'">
+            </a>
+            <div class="text d-block pl-md-4">
+            	<div class="meta mb-3">
+                <div><a href="#" th:text="${item.date}">Sept. 12, 2019</a></div>
+                <div><a href="#">Admin</a></div>
+                <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+              </div>
+              <h3 class="heading"><a href="#" th:text="${item.title}">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+              <p><a th:href="@{/blog/detail(id=${item.id})}" class="btn btn-primary py-2 px-3">Read more</a></p>
+            </div>
+          </div>
+        </div>
+        </div>
+		<div class="row mt-5">
+        <div class="col">
+          <div class="block-27">
+            <ul>
+              <li><a href="#">&lt;</a></li>
+              <li class="active"><span>1</span></li>
+              <li><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">4</a></li>
+              <li><a href="#">5</a></li>
+              <li><a href="#">&gt;</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      </div> <!-- .col-md-8 -->
+      <div class="col-lg-4 sidebar ftco-animate">
+        <div class="sidebar-box bg-light">
+          <form action="#" class="search-form bg-light">
+            <div class="form-group">
+              <span class="icon ion-ios-search"></span>
+              <input type="text" class="form-control" placeholder="Search...">
+            </div>
+          </form>
+        </div>
+        <div class="sidebar-box bg-light ftco-animate">
+        	<h3 class="heading-2">Categories</h3>
+          <ul class="categories">
+            <li><a href="#">Bags <span>(12)</span></a></li>
+            <li><a href="#">Shoes <span>(22)</span></a></li>
+            <li><a href="#">Dress <span>(37)</span></a></li>
+            <li><a href="#">Accessories <span>(42)</span></a></li>
+            <li><a href="#">Makeup <span>(14)</span></a></li>
+            <li><a href="#">Beauty <span>(140)</span></a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-box bg-light ftco-animate">
+          <h3 class="heading-2">Recent Blog</h3>
+          <div class="block-21 mb-4 d-flex">
+            <a class="blog-img mr-4" th:style="'background-image:url(' + @{/frontend/images/work-1.jpg} + ');'"></a>
+            <div class="text">
+              <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+              <div class="meta">
+                <div><a href="#"><span class="icon-calendar"></span> Sept. 12, 2019</a></div>
+                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+              </div>
+            </div>
+          </div>
+          <div class="block-21 mb-4 d-flex">
+            <a class="blog-img mr-4" th:style="'background-image:url(' + @{/frontend/images/work-2.jpg} + ');'"></a>
+            <div class="text">
+              <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+              <div class="meta">
+                <div><a href="#"><span class="icon-calendar"></span> Sept. 12, 2019</a></div>
+                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+              </div>
+            </div>
+          </div>
+          <div class="block-21 mb-4 d-flex">
+            <a class="blog-img mr-4" th:style="'background-image:url(' + @{/frontend/images/work-3.jpg} + ');'"></a>
+            <div class="text">
+              <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+              <div class="meta">
+                <div><a href="#"><span class="icon-calendar"></span> Sept. 12, 2019</a></div>
+                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-box bg-light ftco-animate">
+          <h3 class="heading-2">Tag Cloud</h3>
+          <div class="tagcloud">
+            <a href="#" class="tag-cloud-link">donate</a>
+            <a href="#" class="tag-cloud-link">charity</a>
+            <a href="#" class="tag-cloud-link">non-profit</a>
+            <a href="#" class="tag-cloud-link">organization</a>
+            <a href="#" class="tag-cloud-link">child</a>
+            <a href="#" class="tag-cloud-link">abuse</a>
+            <a href="#" class="tag-cloud-link">help</a>
+            <a href="#" class="tag-cloud-link">volunteer</a>
+          </div>
+        </div>
+
+        <div class="sidebar-box bg-light ftco-animate">
+          <h3 class="heading-2">Paragraph</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section> <!-- .section -->
 </div>
-<script th:inline="javascript" layout:fragment="jscript">
+<script th:inline="javascript" layout:fragment="js">
 /*<![CDATA[*/
-var success = /*[[${success}]]*/ 'default';
-var error = /*[[${error}]]*/ 'default';
-if(success){
-	swal("Thành công!", success, "success");
-}else if(error){
-	swal("Thất bại!", error, "error");
-}
+	var success = /*[[${success}]]*/ 'default';
+	var error = /*[[${error}]]*/ 'default';
+	if(success){
+		swal("Thành công!", success, "success");
+	}else if(error){
+		swal("Thất bại!", error, "error");
+	}
 /*]]>*/
-$(document).ready(function(){
-    $('[data-confirm]').on('click', function(e){
-        e.preventDefault(); //cancel default action
-
-        //Recuperate href value
-        var href = $(this).attr('href');
-        var message = $(this).data('confirm');
-
-        //pop up
-        swal({
-            title: "Are you sure ??",
-            text: message, 
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-            timer:3000,
-        })
-        .then((willDelete) => {
-          if (willDelete) {
-            swal("Success! Xóa thành công!", {
-              icon: "success",
-              timer:4000
-            });
-            window.location.href = href;
-          }
-        });
-    });
-});
-</script>
+</script>	
 </body>
 </html>
