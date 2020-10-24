@@ -13,4 +13,6 @@ public interface BlogService {
 	int delete(int id);
 	void edit(BlogDto dto);
 	int activeBlog (BlogDto dto);
+	BlogDto findBySlug(String slug);
+	List<BlogDto> listActive();
 }

@@ -101,4 +101,21 @@ public class BlogServiceImpl implements BlogService{
 		return 0;
 	}
 
+	@Override
+	public BlogDto findBySlug(String slug) {
+		Blog entity = blogResp.findBySlugDto(slug);
+		BlogDto dto = entityChangeDto(entity);
+		return dto;
+	}
+
+	@Override
+	public List<BlogDto> listActive() {
+		List<Blog> entity = blogResp.listActive(1);
+		List<BlogDto> dto = new ArrayList<>();
+		for(Blog b : entity) {
+			dto.add(entityChangeDto(b));
+		}
+		return dto;
+	}
+
 }

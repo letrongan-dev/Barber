@@ -4,7 +4,7 @@
 	  layout:decorator="layout/frontend/default">
 <head>
 <meta charset="UTF-8">
-<title>HAIR-CARE</title>
+<title>Blog | Hair Care</title>
 </head>
 <body>
 <div layout:fragment="content">
@@ -27,7 +27,7 @@
 		<div class="row">
 			<div class="col-md-12 d-flex ftco-animate" th:each="item: ${blogs}">
           <div class="blog-entry align-self-stretch d-md-flex">
-            <a th:href="@{/blog/detail(id=${item.id})}" class="block-20" th:style="'background-image:url(' + @{${item.imagePhotoPath}} + ');'">
+            <a th:href="@{/blog/detail(slug=${item.slug})}" class="block-20" th:style="'background-image:url(' + @{${item.imagePhotoPath}} + ');'">
             </a>
             <div class="text d-block pl-md-4">
             	<div class="meta mb-3">
@@ -35,9 +35,9 @@
                 <div><a href="#">Admin</a></div>
                 <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
               </div>
-              <h3 class="heading"><a href="#" th:text="${item.title}">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-              <p><a th:href="@{/blog/detail(id=${item.id})}" class="btn btn-primary py-2 px-3">Read more</a></p>
+              <h3 class="heading"><a th:href="@{/blog/detail(slug=${item.slug})}" th:text="${item.title}">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+              <p th:text="${item.description}">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+              <p><a th:href="@{/blog/detail(slug=${item.slug})}" class="btn btn-primary py-2 px-3">Read more</a></p>
             </div>
           </div>
         </div>
@@ -81,39 +81,18 @@
 
         <div class="sidebar-box bg-light ftco-animate">
           <h3 class="heading-2">Recent Blog</h3>
-          <div class="block-21 mb-4 d-flex">
-            <a class="blog-img mr-4" th:style="'background-image:url(' + @{/frontend/images/work-1.jpg} + ');'"></a>
+          <div class="block-21 mb-4 d-flex" th:each="item: ${blogs}">
+            <a class="blog-img mr-4" th:style="'background-image:url(' + @{${item.imagePhotoPath}} + ');'"></a>
             <div class="text">
-              <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+              <h3 class="heading-1" th:text="${item.title}"><a th:href="@{/blog/detail(slug=${item.slug})}">Even the all-powerful Pointing has no control about the blind texts</a></h3>
               <div class="meta">
-                <div><a href="#"><span class="icon-calendar"></span> Sept. 12, 2019</a></div>
+                <div><a href="#"><span class="icon-calendar" th:text="${item.date}"></span> Sept. 12, 2019</a></div>
                 <div><a href="#"><span class="icon-person"></span> Admin</a></div>
                 <div><a href="#"><span class="icon-chat"></span> 19</a></div>
               </div>
             </div>
           </div>
-          <div class="block-21 mb-4 d-flex">
-            <a class="blog-img mr-4" th:style="'background-image:url(' + @{/frontend/images/work-2.jpg} + ');'"></a>
-            <div class="text">
-              <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-              <div class="meta">
-                <div><a href="#"><span class="icon-calendar"></span> Sept. 12, 2019</a></div>
-                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-              </div>
-            </div>
-          </div>
-          <div class="block-21 mb-4 d-flex">
-            <a class="blog-img mr-4" th:style="'background-image:url(' + @{/frontend/images/work-3.jpg} + ');'"></a>
-            <div class="text">
-              <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-              <div class="meta">
-                <div><a href="#"><span class="icon-calendar"></span> Sept. 12, 2019</a></div>
-                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-              </div>
-            </div>
-          </div>
+          
         </div>
 
         <div class="sidebar-box bg-light ftco-animate">
@@ -140,16 +119,5 @@
   </div>
 </section> <!-- .section -->
 </div>
-<script th:inline="javascript" layout:fragment="js">
-/*<![CDATA[*/
-	var success = /*[[${success}]]*/ 'default';
-	var error = /*[[${error}]]*/ 'default';
-	if(success){
-		swal("Thành công!", success, "success");
-	}else if(error){
-		swal("Thất bại!", error, "error");
-	}
-/*]]>*/
-</script>	
 </body>
 </html>

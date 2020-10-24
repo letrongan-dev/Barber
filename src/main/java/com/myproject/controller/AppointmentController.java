@@ -66,7 +66,7 @@ public class AppointmentController {
 			model.addAttribute("combos", combos);
 			return "home/service";
 		}else {
-			re.addFlashAttribute("success", "Đặt lịch thành công!");
+			re.addFlashAttribute("success", "Đặt lịch thành công! Xin quí khách đến trước 15 phút");
 			return "redirect:/";
 		}
 		

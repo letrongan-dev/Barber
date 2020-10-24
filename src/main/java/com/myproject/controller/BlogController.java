@@ -18,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myproject.dto.BlogDto;
-import com.myproject.dto.BlogDtoActive;
 import com.myproject.service.BlogService;
 import com.myproject.util.FileUploadUtil;
 
@@ -27,6 +26,7 @@ public class BlogController {
 
 	@Autowired
 	private BlogService blogServ;
+	
 	
 	@GetMapping(value = "/admin/blog")
 	public String listBlog(ModelMap model) {
@@ -60,7 +60,7 @@ public class BlogController {
 	@GetMapping(value = "/admin/blog/active")
 	public String activeBlog(@RequestParam("id")int id, RedirectAttributes re) {
 		BlogDto dto = blogServ.findById(id);
-		int result = 0;
+		int result;
 		switch (dto.getStatus()) {
 		case 0:
 			dto.setStatus(1);
@@ -92,11 +92,13 @@ public class BlogController {
 		}else if(multipartFile.getSize()!= 0) {
 			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
 			blogDto.setImgBlog(fileName);
+			blogDto.setStatus(blogServ.findById(blogDto.getId()).getStatus());
 			blogServ.edit(blogDto);
 	        String uploadDir = "upload/blog";
 	        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 		}else {
 			blogDto.setImgBlog(blogServ.findById(blogDto.getId()).getImgBlog());
+			blogDto.setStatus(blogServ.findById(blogDto.getId()).getStatus());
 			blogServ.edit(blogDto);
 		}
 		re.addFlashAttribute("success", "Thêm thành công!");
@@ -105,15 +107,18 @@ public class BlogController {
 	
 	@GetMapping(value = "/blog")
 	public String index(ModelMap model) {
-		List<BlogDto> dtos = blogServ.findAll();
+		List<BlogDto> dtos = blogServ.listActive();
 		model.addAttribute("blogs", dtos);
 		return "blog/index";
 	}
 	@GetMapping(value = "/blog/detail")
-	public String getDetail(@RequestParam("id") int id, ModelMap model) {
-		BlogDto dto = blogServ.findById(id);
-		model.addAttribute("blogDetail", dto);
+	public String detail(@RequestParam("slug") String slug, ModelMap model) {
+		BlogDto dto = blogServ.findBySlug(slug);
+		List<BlogDto> dtos = blogServ.listActive();
+		model.addAttribute("blogs", dtos);
+		model.addAttribute("blog", dto);
 		return "blog/detail";
 	}
+	
 	
 }
