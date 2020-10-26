@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "ckeditor.storage.image.path",
+    "type": "java.lang.String",
+    "description": "A description for 'ckeditor.storage.image.path'"
+  },
+  {
+    "name": "ckeditor.access.image.url",
+    "type": "java.lang.String",
+    "description": "A description for 'ckeditor.access.image.url'"
+  }
+]}

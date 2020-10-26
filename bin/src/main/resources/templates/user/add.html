@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorator="layout/backend/default">
+<head>
+<meta charset="UTF-8">
+<title>ADMIN | USER</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="content-header sty-two">
+      <ol class="breadcrumb">
+        <li><a href="#"><strong>ADMIN</strong></a></li>
+        <li><i class="fa fa-angle-right"></i> <a href="#"><strong>Thêm mới User</strong></a></li>
+      </ol>
+    </div>
+   <div class="content">
+   		<div class="card">
+   		<div class="card-body">
+    		<h4 class="text-black text-center"><strong>Thêm mới User</strong></h4>
+    	<form method="post" th:action="@{/admin/users/save}" th:object="${user}" enctype="multipart/form-data" >
+    	<div class="col-md-6 offset-md-3">
+          <fieldset class="form-group">
+            <label>CODE</label>
+            <input class="form-control" type="text" th:field="*{code}" readonly>
+          </fieldset>
+        </div>
+        <div class="col-md-6 offset-md-3">
+          <fieldset class="form-group">
+            <label>Name</label>
+            <input class="form-control" type="text" th:field="*{name}">
+            <span class="text-danger font-italic" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Full name error</span>
+          </fieldset>
+        </div>
+        <div class="col-md-6 offset-md-3">
+          <fieldset class="form-group">
+            <label>Phone</label>
+            <input class="form-control" type="text" th:field="*{phone}">
+            <span class="text-danger font-italic" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Full name error</span>
+          </fieldset>
+        </div><div class="col-md-6 offset-md-3">
+          <fieldset class="form-group">
+            <label>Email</label>
+            <input class="form-control" type="email" th:field="*{email}">
+            <span class="text-danger font-italic" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Full name error</span>
+          </fieldset>
+        </div>
+        <div class="col-md-6 offset-md-3">
+          <fieldset class="form-group">
+            <label>Address</label>
+            <input class="form-control" type="text" th:field="*{address}">
+            <span class="text-danger font-italic" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Full name error</span>
+          </fieldset>
+        </div>
+        <div class="col-md-6 offset-md-3">
+          <fieldset class="form-group">
+            <label>Password</label>
+            <input class="form-control" type="password" th:field="*{password}">
+            <span class="text-danger font-italic" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Full name error</span>
+          </fieldset>
+        </div>
+        <div class="col-md-6 offset-md-3">
+          <fieldset class="form-group">
+            <label>Avatar</label>
+            <input type="file" name="image" accept="image/png, image/jpeg" />
+            <span class="text-danger font-italic" th:if="${#fields.hasErrors('avatar')}" th:errors="*{avatar}">Full name error</span>
+          </fieldset> 
+        </div>
+        <div class="col-md-6 offset-md-3">
+        <h5 class="text-black">ROLE</h5>
+	<select th:field="*{roleId}" class="form-control form-control-line" >
+		<option th:each="item : ${roles}" th:value="${item.id}"  th:text="${item.name}"></option>
+	</select>
+            <span class="text-danger font-italic" th:if="${#fields.hasErrors('avatar')}" th:errors="*{avatar}">Full name error</span>
+        </div>
+        <div class="col-md-6 offset-md-3 text-center mt-4">
+        	 <button type="submit" class="btn btn-success">Thêm</button>
+        	 <a th:href="@{/admin/user}" class="btn btn-primary">Quay lại</a>
+        </div>
+       </form>
+    	</div>
+  	</div>
+	</div>
+</div>
+<script th:inline="javascript" layout:fragment="jscript">
+/*<![CDATA[*/
+var warning = /*[[${warning}]]*/ 'default';
+if(warning){
+	swal("Cảnh báo!", warning, "warning");
+}
+/*]]>*/
+</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorator="layout/backend/default">
+<head>
+<meta charset="UTF-8">
+<title>ADMIN | COMBO</title>
+</head>
+<body>
+	<div layout:fragment="content">
+	    <div class="content-header sty-two">
+	      <ol class="breadcrumb">
+	        <li><a href="#"><strong>ADMIN</strong></a></li>
+	        <li><i class="fa fa-angle-right"></i> <a href="#"><strong>Thêm mới combo</strong></a></li>
+	      </ol>
+	    </div>
+	   <div class="content">
+      		<div class="card">
+      		<div class="card-body">
+	      		<h4 class="text-black text-center"><strong>Thêm mới combo</strong></h4>
+	      	<form method="post" th:action="@{/admin/combo/edit}" th:object="${combo}" >
+	      	<input type="hidden" th:field="*{id}">
+	      	<p class="text-red text-center" th:text=${success}/>
+	          <div class="col-md-6 offset-md-3">
+	            <fieldset class="form-group">
+	              <label>Tên combo</label>
+	              <input class="form-control" type="text" th:field="*{name}">
+	              <span class="text-danger font-italic" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Full name error</span>
+	            </fieldset>
+	          </div>
+	          <div class="col-md-6 offset-md-3">
+	            <fieldset class="form-group">
+	              <label>Giá combo</label>
+	              <input class="form-control" type="number" th:field="*{price}" min="0">
+	              <span class="text-danger font-italic" th:if="${#fields.hasErrors('price')}" th:errors="*{price}" >Full name error</span>
+	            </fieldset>
+	          </div>
+	          <div class="col-md-6 offset-md-3">
+	            <fieldset class="form-group">
+	              <label>Step 1</label>
+	              <input class="form-control" type="text" th:field="*{step1}">
+	              <span class="text-danger font-italic" th:if="${#fields.hasErrors('step1')}" th:errors="*{step1}">Full name error</span>
+	            </fieldset>
+	          </div>
+	          <div class="col-md-6 offset-md-3">
+	            <fieldset class="form-group">
+	              <label>Step 2</label>
+	              <input class="form-control" type="text" th:field="*{step2}">
+	              <span class="text-danger font-italic" th:if="${#fields.hasErrors('step2')}" th:errors="*{step2}">Full name error</span>
+	            </fieldset>
+	          </div>
+	          <div class="col-md-6 offset-md-3">
+	            <fieldset class="form-group">
+	              <label>Step 3</label>
+	              <input class="form-control" type="text" th:field="*{step3}">
+	              <span class="text-danger font-italic" th:if="${#fields.hasErrors('step3')}" th:errors="*{step3}">Full name error</span>
+	            </fieldset>
+	          </div>
+	          <div class="col-md-6 offset-md-3">
+	            <fieldset class="form-group">
+	              <label>Step 4</label>
+	              <input class="form-control" type="text" th:field="*{step4}">
+	              <span class="text-danger font-italic" th:if="${#fields.hasErrors('step4')}" th:errors="*{step4}">Full name error</span>
+	            </fieldset>
+	          </div>
+	          <div class="col-md-6 offset-md-3">
+	            <fieldset class="form-group">
+	              <label>Step 5</label>
+	              <input class="form-control" type="text" th:field="*{step5}">
+	              <span class="text-danger font-italic" th:if="${#fields.hasErrors('step5')}" th:errors="*{step5}">Full name error</span>
+	            </fieldset>
+	          </div>
+	          <div class="col-md-6 offset-md-3 text-center">
+	          	 <button type="submit" class="btn btn-success">Cập nhật</button>
+	          	 <a th:href="@{/admin/combo}" class="btn btn-primary">Quay lại</a>
+	          </div>
+	         </form>
+	      	</div>
+	    	</div>
+		</div>
+</div>
+
+
+	
+</body>
+</html>

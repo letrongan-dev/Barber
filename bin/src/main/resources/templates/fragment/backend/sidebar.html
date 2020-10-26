@@ -1,0 +1,110 @@
+<aside class="main-sidebar" xmlns:th="http://www.thymeleaf.org" th:fragment="sidebar" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"> 
+    <!-- sidebar -->
+    <div class="sidebar"> 
+      <!-- Sidebar user panel -->
+      <div class="user-panel">
+        <div class="image text-center"><img th:src="${#authentication.principal.avatar}" class="img-circle" alt="User Image"> </div>
+        <div class="info">
+          <p sec:authentication ="principal.fullname">NAME</p>
+          <a href="#"><i class="fa fa-envelope"></i></a> <a href="#"><i class="fa fa-gear"></i></a> <a href="#"><i class="fa fa-power-off"></i></a> </div>
+      </div>
+      
+      <!-- sidebar menu -->
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="header">ADMINISTRATOR</li>
+        <li class="treeview"> <a> <i class="icon-home"></i> <span>Dashboard</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+          <ul class="treeview-menu">
+            <li><a th:href="@{/admin/dashboard}"><i class="fa fa-angle-right"></i> Tổng quan</a></li>
+          </ul>
+        </li>
+        <li class="treeview" sec:authorize="hasAnyRole('ROLE_ADMINISTRATOR','ROLE_MANAGER')"> <a> <i class="icon-grid"></i> <span>Quản lý hệ thống</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+          <ul class="treeview-menu">
+            <li><a th:href="@{/admin/user}"><i class="fa fa-angle-right"></i> Quản lý người dùng</a></li>
+            <li><a th:href="@{/admin/role}"><i class="fa fa-angle-right"></i> Quản lý quyền hệ thống</a></li>
+          </ul>
+        </li>
+        <li class="header">MODULE QUẢN LÝ</li>
+        <li class="treeview"> <a href="#"> <i class="ti-email"></i> <span>Quản lý lịch hẹn</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+          <ul class="treeview-menu">
+            <li><a th:href="@{/admin/appointment}"><i class="fa fa-angle-right"></i>Danh sách lịch hẹn</a></li>
+          </ul>
+        </li>
+        <li class="treeview"> <a href="#"> <i class="fa fa-picture-o"></i> <span>Quản lý hình ảnh</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+          <ul class="treeview-menu">
+            <li><a href="ui-cards.html"><i class="fa fa-angle-right"></i> Cards</a></li>
+          </ul>
+        </li>
+        <li class="treeview"> <a href="#"> <i class="icon-note"></i> <span>Quản lý bài viết</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+          <ul class="treeview-menu">
+            <li><a th:href="@{/admin/blog}"><i class="fa fa-angle-right"></i>Danh sách bài viết</a></li>
+          </ul>
+        </li>
+        <li class="header">EXTRA COMPONENTS</li>
+        <li class="treeview"> <a href="#"><i class="icon-chart"></i> <span>Charts</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+          <ul class="treeview-menu">
+            <li><a href="chart-morris.html"><i class="fa fa-angle-right"></i> Morris Chart</a></li>
+            <li><a href="chart-chartist.html"><i class="fa fa-angle-right"></i> Chartis Chart</a></li>
+            <li><a href="chart-knob.html"><i class="fa fa-angle-right"></i> Knob Chart</a></li>
+            <li><a href="chart-chart-js.html"><i class="fa fa-angle-right"></i> Chartjs</a></li>
+            <li><a href="chart-peity.html"><i class="fa fa-angle-right"></i> Peity Chart</a></li>
+          </ul>
+        </li>
+        
+        <li class="treeview"> <a href="#"> <i class="icon-docs"></i> <span>Sample Pages</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+          <ul class="treeview-menu">
+            <li><a href="pages-blank.html"><i class="fa fa-angle-right"></i> Blank page</a></li>
+            <li class="treeview"><a href="#"><i class="fa fa-angle-right"></i> Authentication <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+              <ul class="treeview-menu">
+                <li><a href="pages-login.html"><i class="fa fa-angle-right"></i> Login 1</a></li>
+                <li><a href="pages-login-2.html"><i class="fa fa-angle-right"></i> Login 2</a></li>
+                <li><a href="pages-register.html"><i class="fa fa-angle-right"></i> Register</a></li>
+                <li><a href="pages-register2.html"><i class="fa fa-angle-right"></i> Register 2</a></li>
+                <li><a href="pages-lockscreen.html"><i class="fa fa-angle-right"></i> Lockscreen</a></li>
+                <li><a href="pages-recover-password.html"><i class="fa fa-angle-right"></i> Recover password</a></li>
+              </ul>
+            </li>
+            <li><a href="pages-profile.html"><i class="fa fa-angle-right"></i> Profile page</a></li>
+            <li><a href="pages-invoice.html"><i class="fa fa-angle-right"></i> Invoice</a></li>
+            <li><a href="pages-treeview.html"><i class="fa fa-angle-right"></i> Treeview</a></li>
+            <li><a href="pages-pricing.html"><i class="fa fa-angle-right"></i> Pricing</a></li>
+            <li><a href="pages-gallery.html"><i class="fa fa-angle-right"></i> Gallery</a></li>
+            <li><a href="pages-faq.html"><i class="fa fa-angle-right"></i> Faqs</a></li>
+            <li><a href="pages-404.html"><i class="fa fa-angle-right"></i> 404 Error Page</a></li>
+          </ul>
+        </li>
+        <li class="treeview"> <a href="#"> <i class="icon-location-pin"></i> <span>Maps</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+          <ul class="treeview-menu">
+            <li><a href="map-google.html"><i class="fa fa-angle-right"></i> Google Maps</a></li>
+            <li><a href="map-vector.html"><i class="fa fa-angle-right"></i> Vector Maps</a></li>
+          </ul>
+        </li>
+        <li class="treeview"> <a href="#"> <i class="icon-energy"></i> <span>Icons</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+          <ul class="treeview-menu">
+            <li><a href="icon-fontawesome.html"><i class="fa fa-angle-right"></i> Fontawesome Icons</a></li>
+            <li><a href="icon-themify.html"><i class="fa fa-angle-right"></i> Themify Icons</a></li>
+            <li><a href="icon-weather.html"><i class="fa fa-angle-right"></i> Weather Icons</a></li>
+            <li><a href="icon-simple-lineicon.html"><i class="fa fa-angle-right"></i> Simple Lineicons</a></li>
+            <li><a href="icon-flag.html"><i class="fa fa-angle-right"></i> Flag Icons</a></li>
+          </ul>
+        </li>
+        <li class="treeview"> <a href="#"> <i class="icon-action-redo"></i> <span>Multilevel</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-angle-right"></i> Level One</a></li>
+            <li class="treeview"> <a href="#"><i class="fa fa-angle-right"></i> Level One <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+              <ul class="treeview-menu">
+                <li><a href="#"><i class="fa fa-angle-right"></i> Level Two</a></li>
+                <li class="treeview"> <a href="#" ><i class="fa fa-angle-right"></i> Level Two <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+                  <ul class="treeview-menu">
+                    <li><a href="#"><i class="fa fa-angle-right"></i> Level Three</a></li>
+                    <li><a href="#"><i class="fa fa-angle-right"></i> Level Three</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><a href="#"><i class="fa fa-angle-right"></i> Level One</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <!-- /.sidebar --> 
+  </aside>

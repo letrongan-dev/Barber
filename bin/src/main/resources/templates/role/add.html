@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorator="layout/backend/default">
+<head>
+<meta charset="UTF-8">
+<title>ADMIN | ROLE</title>
+</head>
+<body>
+	<div layout:fragment="content">
+	    <div class="content-header sty-two">
+	      <ol class="breadcrumb">
+	        <li><a href="#"><strong>ADMIN</strong></a></li>
+	        <li><i class="fa fa-angle-right"></i> <a href="#"><strong>Thêm mới quyền</strong></a></li>
+	      </ol>
+	    </div>
+	   <div class="content">
+      		<div class="card">
+      		<div class="card-body">
+	      		<h4 class="text-black text-center"><strong>Thêm mới quyền</strong></h4>
+	      	<form method="post" th:action="@{/admin/role/add}" th:object="${role}" >
+	          <div class="col-md-6 offset-md-3">
+	            <fieldset class="form-group">
+	              <label>Tên quyền</label>
+	              <input class="form-control" type="text" th:field="*{name}">
+	              <span class="text-danger font-italic" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Full name error</span>
+	            </fieldset>
+	          </div>
+	          <div class="col-md-6 offset-md-3">
+	            <fieldset class="form-group">
+	              <label>Mô tả</label>
+	              <small class="text-muted"><strong>(Chức năng của quyền trong hệ thống)</strong></small>
+	              <input class="form-control" type="text" th:field="*{desc}">
+	              <span class="text-danger font-italic" th:if="${#fields.hasErrors('desc')}" th:errors="*{desc}">Full name error</span>
+	            </fieldset>
+	          </div>
+	          <div class="col-md-6 offset-md-3 text-center">
+	          	 <button type="submit" class="btn btn-success">Thêm</button>
+	          	 <a th:href="@{/admin/role}" class="btn btn-primary">Quay lại</a>
+	          </div>
+	         </form>
+	      	</div>
+	    	</div>
+		</div>
+</div>
+<script th:inline="javascript" layout:fragment="jscript">
+/*<![CDATA[*/
+var warning = /*[[${warning}]]*/ 'default';
+if(warning){
+	swal("Cảnh báo!", warning, "warning");
+}
+/*]]>*/
+</script>
+
+	
+</body>
+</html>

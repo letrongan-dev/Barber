@@ -49,9 +49,12 @@
               		th:text="${cb.name}">1</td>	 
               <td th:text="${item.message}">(None)</td>
               <td th:text="${item.nameStylist}">No Valid</td>
-              <td th:if="${item.nameStylist}==null">
-                   <a th:href="@{/admin/appointment/update-stylist(id=${item.id})}" class="btn btn-sm btn-info">
+              <td >
+                   <a th:if="${item.nameStylist}==null" th:href="@{/admin/appointment/update-stylist(id=${item.id})}" class="btn btn-sm btn-info">
                        <i class="fa fa-pencil-square-o"></i>
+                   </a>
+                   <a th:href="@{/admin/bill(id=${item.id})}" class="btn btn-sm btn-warning">
+                       <i class="fa fa-dollar"></i>
                    </a>
                </td>
             </tr>

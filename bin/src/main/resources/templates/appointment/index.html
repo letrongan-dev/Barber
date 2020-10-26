@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="layout/backend/default">
+<head>
+<meta charset="UTF-8">
+<title>Danh sách lịch hẹn</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="content-header sty-one">
+<h1> Danh sách lịch hẹn  </h1>
+  <ol class="breadcrumb mb-4">
+    <li><a href="#">ADMIN</a></li>
+    <li><i class="fa fa-angle-right"></i> <a href="#">Danh sách lịch hẹn</a></li>
+  </ol>
+</div>
+<div class="content">
+   <div class="card">
+   <div class="card-body">
+	<div class="col-md-12">
+      <div class="table-responsive mt-4">
+        <table class="table">
+          <thead class="bg-success text-white">
+            <tr>
+            	<th scope="col">STT</th>
+	             <th scope="col">Date</th>
+	             <th scope="col">Time</th>
+	             <th scope="col">Name</th>
+	             <th scope="col">Phone</th>
+	             <th scope="col">Combo</th>
+	             <th scope="col">Message</th>
+	             <th scope="col">Stylist</th>
+	             <th scope="col">#</th>
+            </tr>
+          </thead>
+          <tbody>
+	          <tr th:if="${apps == null || apps.empty}">
+	            	<td colspan="7" class="text-center">No Available</td>
+	          </tr>
+            <tr th:each="item: ${apps}">
+              <td th:text="${item.id}"></td>
+              <td th:text="${item.date}">A101</td>
+              <td th:text="${item.time}">Tphcm</td>
+              <td th:text="${item.name}">Mark</td>
+              <td th:text="${item.phone}">090908561</td>
+              <td   th:each="cb: ${combos}" 
+      				th:if="${cb.id} == ${item.comboId}"
+              		th:text="${cb.name}">1</td>	 
+              <td th:text="${item.message}">(None)</td>
+              <td th:text="${item.nameStylist}">No Valid</td>
+              <td th:if="${item.nameStylist}==null">
+                   <a th:href="@{/admin/appointment/update-stylist(id=${item.id})}" class="btn btn-sm btn-info">
+                       <i class="fa fa-pencil-square-o"></i>
+                   </a>
+               </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+	</div>
+	</div>
+	</div>
+</div>
+<script th:inline="javascript" layout:fragment="jscript">
+/*<![CDATA[*/
+var empty = /*[[${error}]]*/ 'default';
+var success = /*[[${success}]]*/ 'default';
+if(empty){
+	swal("LỐI", empty, "error");
+}else if(success){
+	swal("Thành công", success, "success");
+}
+/*]]>*/
+$(document).ready(function(){
+    $('[data-confirm]').on('click', function(e){
+        e.preventDefault(); //cancel default action
+
+        //Recuperate href value
+        var href = $(this).attr('href');
+        var message = $(this).data('confirm');
+
+        //pop up
+        swal({
+            title: "Are you sure ??",
+            text: message, 
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            timer:3000,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            swal("Success! Xóa thành công!", {
+              icon: "success",
+              timer:4000
+            });
+            window.location.href = href;
+          }
+        });
+    });
+});
+</script>
+</body>
+</html>

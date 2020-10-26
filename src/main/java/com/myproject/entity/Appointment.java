@@ -31,6 +31,8 @@ public class Appointment {
 	@Column(name = "name_stylist")
 	private String nameStylist;
 	
+	@Column(name = "id_user")
+	private int userId;
 	
 	@Column(name = "phone", nullable = false)
 	private String phone; 
@@ -68,6 +70,22 @@ public class Appointment {
 		this.message = message;
 		this.combo = combo;
 	}
+	
+	
+	public Appointment(int id, Date date, String name, String nameStylist, int userId, String phone, String time,
+			int comboId, String message) {
+		super();
+		this.id = id;
+		this.date = date;
+		this.name = name;
+		this.nameStylist = nameStylist;
+		this.userId = userId;
+		this.phone = phone;
+		this.time = time;
+		this.comboId = comboId;
+		this.message = message;
+	}
+
 	public Appointment(int id, Date date, String name, String nameStylist, String phone, String time,
 			int comboId, Combo combo) {
 		super();
@@ -171,6 +189,14 @@ public class Appointment {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	
 	

@@ -77,6 +77,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 		appDto.setTime(entity.getTime());
 		appDto.setMessage(entity.getMessage());
 		appDto.setComboId(entity.getComboId());
+		appDto.setStylistId(entity.getUserId());
 		return appDto;
 	}
 	
@@ -89,6 +90,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 		entity.setDate(appDto.getDate());
 		entity.setComboId(appDto.getComboId());
 		entity.setMessage(appDto.getMessage());
+		entity.setUserId(appDto.getStylistId());
 		return entity;
 	}
 
@@ -110,6 +112,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 		Appointment entity = appRepsitory.getOne(appDto.getId());
 		entity.setName(appDto.getName());
 		entity.setNameStylist(appDto.getNameStylist());
+		entity.setUserId(appDto.getStylistId());
 		entity.setPhone(appDto.getPhone());
 		entity.setTime(appDto.getTime());
 		entity.setDate(appDto.getDate());

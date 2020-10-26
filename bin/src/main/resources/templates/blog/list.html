@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="layout/backend/default">
+<head>
+<meta charset="UTF-8">
+<title>Danh sách bài viết</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="content-header sty-one">
+<h1> Danh sách Blog</h1>
+  <ol class="breadcrumb mb-4">
+    <li><a href="#">ADMIN</a></li>
+    <li><i class="fa fa-angle-right"></i> <a href="#">Danh sách bài viết</a></li>
+  </ol>
+</div>
+<div class="content">
+   <div class="card">
+   <div class="card-body">
+	<div class="col-md-12">
+      <div class="table-responsive mt-4">
+        <table class="table">
+        	<a th:href="@{/admin/blog/add}" class="btn btn-success text-white float-right">+ Thêm mới</a>
+          <thead class="bg-info text-white">
+            <tr>
+            <th scope="col">STT</th>
+              <th scope="col">Date</th>
+              <th scope="col">IMAGE</th>
+              <th scope="col">Title</th>
+              <th scope="col">Description</th>
+              <th scope="col">STATUS</th>
+              <th scope="col">#</th>
+            </tr>
+          </thead>
+          <tbody>
+	          <tr th:if="${blogs == null || blogs.empty}">
+	            	<td colspan="7" class="text-center">No Available</td>
+	          </tr>
+            <tr th:each="item: ${blogs}">
+              <td th:text="${item.id}">A101</td>
+              <td th:text="${item.date}">Mark</td>
+              <td><img alt="" th:src="@{${item.imagePhotoPath}}" style="width: 70px; height: 70px"></td>
+              <td th:text="${item.title}">090908561</td>
+              <td th:text="${item.description}">admin@gmail.com</td>
+              <td th:switch="${item.status}">
+              	<span th:case="'0'">Ẩn</span>
+              	<span th:case="'1'">Hiển thị</span>
+              	<span th:case="*">No Valid</span>
+              </td>
+              <td>
+                   <a th:href="@{/admin/blog/active(id=${item.id})}" class="btn btn-sm btn-primary" >
+                       <i class="fa fa-check-square-o"></i>
+                   </a>
+                   <a th:href="@{/admin/blog/edit(id=${item.id})}" class="btn btn-sm btn-success">
+                       <i class="fa  fa-pencil-square-o"></i>
+                   </a>
+               </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+	</div>
+	</div>
+	</div>
+</div>
+<script th:inline="javascript" layout:fragment="jscript">
+/*<![CDATA[*/
+var success = /*[[${success}]]*/ 'default';
+var error = /*[[${error}]]*/ 'default';
+if(success){
+	swal("Thành công!", success, "success");
+}else if(error){
+	swal("Thất bại!", error, "error");
+}
+/*]]>*/
+</script>
+</body>
+</html>

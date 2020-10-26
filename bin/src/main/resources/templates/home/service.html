@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="layout/frontend/default">
+<head>
+<meta charset="UTF-8">
+<title>Hair - Service</title>
+</head>
+<body layout:fragment="content">
+<section class="hero-wrap hero-wrap-2" th:style="'background-image:url(' + @{/frontend/images/bg-1.jpg} + ');'" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
+        <div class="col-md-9 ftco-animate pb-5 text-center">
+          <h2 class="mb-0 bread">Services</h2>
+          <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-round-forward"></i></a></span> <span>Services <i class="ion-ios-arrow-round-forward"></i></span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="services-section ftco-section">
+    <div class="container">
+    	<div class="row justify-content-center pb-3">
+        <div class="col-md-10 heading-section text-center ftco-animate">
+        <h1 class="alert-success text center" th:text="${success}"></h1>
+        	<span class="subheading">Services</span>
+          <h2 class="mb-4">Services Menu</h2>
+          <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+        </div>
+      </div>
+      <div class="row no-gutters d-flex">
+        <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
+          <div class="media block-6 services d-block text-center">
+            <div class="icon"><span class="flaticon-male-hair-of-head-and-face-shapes"></span></div>
+            <div class="media-body">
+              <h3 class="heading mb-3">Haircut &amp; Styling</h3>
+              <p>A small river named Duden flows by their place and supplies.</p>
+            </div>
+          </div>    
+        </div>
+        <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
+          <div class="media block-6 services d-block text-center">
+            <div class="icon"><span class="flaticon-beard"></span></div>
+            <div class="media-body">
+              <h3 class="heading mb-3">Beard</h3>
+              <p>A small river named Duden flows by their place and supplies.</p>
+            </div>
+          </div>      
+        </div>
+        <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
+          <div class="media block-6 services d-block text-center">
+            <div class="icon"><span class="flaticon-beauty-products"></span></div>
+            <div class="media-body">
+              <h3 class="heading mb-3">Makeup</h3>
+              <p>A small river named Duden flows by their place and supplies.</p>
+            </div>
+          </div>      
+        </div>
+        <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
+          <div class="media block-6 services d-block text-center">
+            <div class="icon"><span class="flaticon-healthy-lifestyle-logo"></span></div>
+            <div class="media-body">
+              <h3 class="heading mb-3">Body Treatment</h3>
+              <p>A small river named Duden flows by their place and supplies.</p>
+            </div>
+          </div>      
+        </div>
+      </div>
+    </div>
+  </section>
+<section class="ftco-section ftco-pricing bg-light">
+	<div class="container">
+		<div class="row justify-content-center pb-3">
+        <div class="col-md-10 heading-section text-center ftco-animate">
+        	<span class="subheading">Pricing</span>
+          <h2 class="mb-4">Our Prices</h2>
+          <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+        </div>
+      </div>
+      <div class="row">
+      	<div class="col-md-3 ftco-animate" th:each="item: ${combos}">
+      		<div class="pricing-entry pb-5 text-center">
+      			<div>
+       			<h3 class="mb-4" th:text="${item.name}" id="nameCombo">Manicure Pedicure</h3>
+       			<p><span class="price" th:text="${item.price}">$34.50</span> <span class="per">/ session</span></p>
+       		</div>
+      			<ul>
+      				<li th:text="${item.step1}">Manicure</li>
+					<li th:text="${item.step2}">Pedicure</li>
+					<li th:text="${item.step3}">Coloring</li>
+					<li th:text="${item.step4}">Nails</li>
+					<li th:text="${item.step5}">Nail Cut</li>
+      			</ul>
+      			<p class="button text-center"></p>
+      		</div>
+      	</div>
+      	
+      </div>
+	</div>
+</section>
+  <section class="ftco-section ftco-booking ">
+  	<div class="container ftco-relative">
+  		<div class="row justify-content-center pb-3">
+        <div class="col-md-10 heading-section text-center ftco-animate">
+        	<span class="subheading">Booking</span>
+          <h2 class="mb-4">Make an Appointment</h2>
+          <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+        </div>
+      </div>
+      <h3 class="vr">Call Us: 012-3456-7890</h3>
+  		<div class="row justify-content-center">
+  			<div class="col-md-10 ftco-animate">
+  				<form th:action="@{/appointment}" class="appointment-form" th:object="${appointment}" method="post">
+           <div class="row">
+             <div class="col-sm-6">
+               <div class="form-group">
+	              <input type="text" class="form-control" id="appointment_name" name="name" placeholder="Name" th:field="*{name}">
+	              <span class="text-danger text-italic" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+	            </div>
+             </div>
+             <div class="col-sm-6">
+               <div class="form-group">
+                 <input type="date" name="date" placeholder="Date" th:field="*{date}">
+                 <span class="text-danger text-italic" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span>
+               </div>    
+             </div>
+             <div class="col-sm-6">
+               <div class="form-group">
+                 <input type="text" class="form-control appointment_time" name="time" placeholder="Time" th:field="*{time}">
+                <span class="text-danger text-italic" th:if="${#fields.hasErrors('time')}" th:errors="*{time}"></span>
+               </div>
+             </div>
+             <div class="col-sm-6">
+               <div class="form-group">
+	               <div class="select-wrap">
+	                  <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+	                  <select class="form-control" th:field="*{comboId}">
+	                  	<option th:each="item: ${combos}" th:value="${item.id}" th:text="${item.name}">Professional Makeup</option>
+	                  </select>
+	                </div>
+	              <span class="text-danger text-italic" th:if="${#fields.hasErrors('comboId')}" th:errors="*{comboId}"></span>
+	            </div>
+             </div>
+             <div class="col-sm-6">
+               <div class="form-group">
+                 <input type="text" class="form-control" id="phone" placeholder="Phone" th:field="*{phone}"> 
+                 <span class="text-danger text-italic" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
+               </div>
+             </div>
+             <div class="col-md-12">
+             	<div class="form-group">
+                <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message" th:field="*{message}"></textarea>
+                <span class="text-danger text-italic" th:if="${#fields.hasErrors('message')}" th:errors="*{message}"></span>
+              </div>
+             </div>
+          </div>
+          <div class="form-group">
+             <input type="submit" value="Make an Appointment" class="btn btn-primary">
+           </div>
+         </form>
+  			</div>
+  		</div>
+  	</div>
+  </section>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script th:inline="javascript" layout:fragment="js">
+/*<![CDATA[*/
+	var warning = /*[[${warning}]]*/ 'default';
+	if(warning){
+		swal("Thông báo!", warning, "warning");
+	}
+/*]]>*/
+</script>	
+</body>
+</html>
