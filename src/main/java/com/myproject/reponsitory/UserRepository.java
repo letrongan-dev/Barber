@@ -20,4 +20,7 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	
 	@Query("SELECT u FROM User u JOIN Role r ON u.roleId = r.id WHERE u.roleId = :id")
 	List<User> listStylist(int id);
+	
+	@Query("SELECT u FROM User u JOIN Role r ON u.roleId = r.id WHERE u.roleId = :idST OR u.roleId = :idCus")
+	List<User> listStylistAndCus(int idST, int idCus);
 }

@@ -458,12 +458,15 @@
 </div>
 <script th:inline="javascript" layout:fragment="js">
 /*<![CDATA[*/
-	var success = /*[[${success}]]*/ 'default';
+	var notexists = /*[[${notexists}]]*/ 'default';
 	var error = /*[[${error}]]*/ 'default';
+	var success = /*[[${success}]]*/ 'default';
 	if(success){
 		swal("Thành công!", success, "success");
 	}else if(error){
 		swal("Thất bại!", error, "error");
+	}else if(notexists){
+		swal("Không tìm thấy!", warning, "notexists");
 	}
 /*]]>*/
 </script>	

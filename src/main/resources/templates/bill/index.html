@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorator="layout/backend/default">
+<head>
+<meta charset="UTF-8">
+<title>ADMIN | BILL</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="content-header sty-two">
+      <ol class="breadcrumb">
+        <li><a href="#"><strong>ADMIN</strong></a></li>
+        <li><i class="fa fa-angle-right"></i> <a href="#"><strong>Hóa đơn</strong></a></li>
+      </ol>
+    </div>
+   <div class="content">
+   		<div class="card">
+   		<div class="card-body">
+   		<h4 class="text-red text-center"><strong>HÓA ĐƠN THANH TOÁN</strong></h4>
+    	<form th:action="@{/admin/payment}" method="post" th:object="${bill}" th:each="item: ${bill}">
+    	<input class="form-control" type="hidden" name="id" th:value="${item.id}">
+        <div class="col-md-6 offset-md-3">
+          <fieldset class="form-group">
+            <label>Tên khách hàng :    </label>
+            <input class="form-control" type="text" th:name="nameCustomer" th:value="${item.nameCustomer}">
+          </fieldset>
+        </div>
+        <div class="col-md-6 offset-md-3">
+          <fieldset class="form-group">
+            <label>Số điện thoại : </label>
+           <input class="form-control" type="text" th:name="phone" th:value="${item.phone}">
+          </fieldset>
+        </div>
+        <div class="col-md-6 offset-md-3">
+          <fieldset class="form-group">
+            <label>Giá tiền : (VNĐ)</label>
+           <input class="form-control" type="text" id="cBalance" th:each="cb : ${combos}" 
+           											th:if ="${item.comboId} == ${cb.id}"
+           											th:value="${cb.price}">
+          </fieldset>
+        </div>
+        <div class="col-md-6 offset-md-3 mt-3">
+        <label>Combo</label>
+		<select class="form-control form-control-line" th:field="*{comboId}" disabled>
+			<option th:each="cb : ${combos}" th:value="${cb.id}"  th:text="${cb.name}"></option>
+		</select>
+            
+        </div>
+        <div class="col-md-6 offset-md-3 mt-3">
+        <label>Stylist</label>
+		<select class="form-control form-control-line" th:field="*{userId}" disabled>
+			<option th:each="st: ${stylists}" 
+			th:if ="${item.userId} == ${st.id}"
+			th:value="${st.id}" th:text="${st.name}"></option>
+		</select>
+		</div>
+		 <div class="col-md-6 offset-md-3 mt-3">
+	        <fieldset class="form-group">
+	          <label>Note</label>
+	          <textarea class="form-control" th:field="*{note}" type="text"></textarea>
+	        </fieldset>
+	      </div>
+		<div class="col-md-6 offset-md-3 mt-3 row">
+		<p class="text-black font-italic">Discount: (%)</p>
+           <input type="number" id="chDiscount" class="form-control" min="0" max="10" value="0">
+        </div>
+		<div class="col-md-6 offset-md-3">
+          <fieldset class="form-group">
+            <label>Tổng cộng</label>
+           <input class="form-control" id="result" type="text" th:field="*{total}">
+          </fieldset>
+        </div>
+        <div class="col-md-6 offset-md-3 text-center mt-4">
+        	 <button type="submit" class="btn btn-success">Tính tiền</button>
+        </div>
+       </form>
+    	</div>
+  	</div>
+	</div>
+</div>
+<script th:inline="javascript" layout:fragment="jscript">
+/*<![CDATA[*/
+var warning = /*[[${warning}]]*/ 'default';
+if(warning){
+	swal("Cảnh báo!", warning, "warning");
+}
+/*]]>*/	
+$(document).on("change keyup blur", "#chDiscount", function() {
+    var main = $('#cBalance').val();
+    var disc = $('#chDiscount').val();
+    var dec = (disc / 100).toFixed(2); //its convert 10 into 0.10
+    var mult = main * dec; // gives the value for subtract from main value
+    var discont = main - mult;
+    $('#result').val(discont);
+});
+
+
+</script>
+</body>
+</html>

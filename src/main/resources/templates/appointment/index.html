@@ -65,6 +65,80 @@
 	</div>
 	</div>
 	</div>
+<!--<input>  data-toggle="modal" data-target="#ModalLoginForm"-->
+<!-- Modal HTML Markup -->
+<div id="ModalLoginForm" class="modal fade">
+   <div class="modal-dialog" role="document">
+       <div class="modal-content">
+           <div class="modal-header">
+               <h1 class="modal-title">Thanh toán</h1>
+           </div>
+           <div class="modal-body">
+               <form th:action="@{/admin/payment}" method="post" th:object="${bill}" th:each="item: ${app}">
+    	<input class="form-control" type="hidden" name="id" th:value="${item.id}">
+        <div class="col-md-6 offset-md-3">
+          <fieldset class="form-group">
+            <label>Tên khách hàng :    </label>
+            <input class="form-control" type="text" th:value="${item.name}">
+          </fieldset>
+        </div>
+        <div class="col-md-6 offset-md-3">
+          <fieldset class="form-group">
+            <label>Số điện thoại : </label>
+           <input class="form-control" type="text" th:value="${item.phone}">
+          </fieldset>
+        </div>
+        <div class="col-md-6 offset-md-3">
+          <fieldset class="form-group">
+            <label>Giá tiền : </label>
+           <input class="form-control" type="text" id="price" th:each="cb : ${combos}" 
+           											th:if ="${item.comboId} == ${cb.id}"
+           											th:value="${cb.price}"> VNĐ
+          </fieldset>
+        </div>
+        <div class="col-md-6 offset-md-3 mt-3">
+        <label>Combo</label>
+		<select class="form-control form-control-line" disabled>
+			<option th:each="cb : ${combos}" th:value="${cb.id}"  th:text="${cb.name}"></option>
+		</select>
+            
+        </div>
+        <div class="col-md-6 offset-md-3 mt-3">
+        <label>Stylist</label>
+		<select class="form-control form-control-line" disabled>
+			<option th:each="st: ${stylists}" th:value="${st.id}" th:text="${st.name}"></option>
+		</select>
+		</div>
+		<div class="col-md-6 offset-md-3 mt-3 row">
+		<p class="text-black font-italic">Discount: </p>
+            <div class="radio ml-5">
+              <label>
+                <input class='radio' type="radio" name="optionsRadios" id="optionsRadios1" data-value="5"> 5% </label>
+            </div>
+            <div class="radio ml-3">
+              <label>
+                <input class='radio' type="radio" name="optionsRadios" id="optionsRadios2" data-value="10"> 10%</label>
+            </div>
+            <div class="radio ml-3">
+              <label>
+                <input class='radio' type="radio" name="optionsRadios" id="optionsRadios2" data-value="15"> 15%</label>
+            </div>
+        </div>
+		<div class="col-md-6 offset-md-3">
+          <fieldset class="form-group">
+            <label>Tổng cộng</label>
+           <input class="form-control" id="total" type="text" th:field="*{total}">
+          </fieldset>
+        </div>
+        <div class="col-md-6 offset-md-3 text-center mt-4">
+        	 <button type="submit" class="btn btn-success">Thêm</button>
+        	 <a th:href="@{/admin/user}" class="btn btn-primary">Quay lại</a>
+        </div>
+       </form>
+           </div>
+       </div><!-- /.modal-content -->
+   </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 </div>
 <script th:inline="javascript" layout:fragment="jscript">
 /*<![CDATA[*/

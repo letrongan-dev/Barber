@@ -22,4 +22,8 @@
 
 
 <script xmlns:th="http://www.thymeleaf.org"
-	  	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:fragment="jscript"></script>
+	  	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:fragment="jscript">
+$('#ModalLoginForm').modal('hide');
+$('body').removeClass('modal-open');
+$('.modal-backdrop fade show').remove();
+</script>

@@ -17,13 +17,18 @@
             <li><a th:href="@{/admin/dashboard}"><i class="fa fa-angle-right"></i> Tổng quan</a></li>
           </ul>
         </li>
-        <li class="treeview" sec:authorize="hasAnyRole('ROLE_ADMINISTRATOR','ROLE_MANAGER')"> <a> <i class="icon-grid"></i> <span>Quản lý hệ thống</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+        <li class="treeview" sec:authorize="hasRole('ROLE_ADMINISTRATOR')"> <a> <i class="icon-grid"></i> <span>Quản lý hệ thống</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
           <ul class="treeview-menu">
             <li><a th:href="@{/admin/user}"><i class="fa fa-angle-right"></i> Quản lý người dùng</a></li>
             <li><a th:href="@{/admin/role}"><i class="fa fa-angle-right"></i> Quản lý quyền hệ thống</a></li>
           </ul>
         </li>
         <li class="header">MODULE QUẢN LÝ</li>
+        <li class="treeview" > <a> <i class="fa fa-file-text"></i> <span>Quản lý hóa đơn</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+          <ul class="treeview-menu">
+            <li><a th:href="@{/admin/bill}"><i class="fa fa-angle-right"></i> Danh sách hóa đơn</a></li>
+          </ul>
+        </li>
         <li class="treeview"> <a href="#"> <i class="fa fa-envelope"></i> <span>Quản lý lịch hẹn</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
           <ul class="treeview-menu">
             <li><a th:href="@{/admin/appointment}"><i class="fa fa-angle-right"></i>Danh sách lịch hẹn</a></li>

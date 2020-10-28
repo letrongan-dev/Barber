@@ -19,4 +19,6 @@ public interface UserService {
 	String generateRandom(int len);
 	int checkExist(String email);
 	List<UserDto> listStylist();
+	List<UserDto> listStylistAndCus(int idST, int idCus);
+	Object checkLogin(UserDto dto);
 }

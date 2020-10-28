@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="layout/backend/default">
+<head>
+<meta charset="UTF-8">
+<title>Danh sách hóa đơn</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="content-header sty-one">
+<h1> Danh sách lịch hẹn  </h1>
+  <ol class="breadcrumb mb-4">
+    <li><a href="#">ADMIN</a></li>
+    <li><i class="fa fa-angle-right"></i> <a href="#">Danh sách hóa đơn</a></li>
+  </ol>
+</div>
+<div class="content">
+   <div class="card">
+   <div class="card-body">
+	<div class="col-md-12">
+      <div class="table-responsive mt-4">
+        <table class="table">
+          <thead class="bg-success text-white">
+            <tr>
+            	<th scope="col">STT</th>
+	             <th scope="col">Ngày tạo</th>
+	             <th scope="col">Name</th>
+	             <th scope="col">Phone</th>
+	             <th scope="col">Combo</th>
+	             <th scope="col">Note</th>
+	             <th scope="col">Total</th>
+	             <th scope="col">Stylist</th>
+	             <th scope="col">Trạng thái</th>
+	             <th scope="col">#</th>
+            </tr>
+          </thead>
+          <tbody>
+	          <tr th:if="${bills == null || bills.empty}">
+	            	<td colspan="7" class="text-center">No Available</td>
+	          </tr>
+            <tr th:each="item: ${bills}">
+              <td th:text="${item.id}"></td>
+              <td th:text="${item.createdAt}">A101</td>
+              <td th:text="${item.nameCustomer}">Mark</td>
+              <td th:text="${item.phone}">090908561</td>
+              <td   th:each="cb: ${combos}" 
+      				th:if="${cb.id} == ${item.comboId}"
+              		th:text="${cb.name}">1</td>	 
+              <td th:text="${item.note}">(None)</td>
+              <td th:text="${item.total}">(None)</td>
+              <td th:each="st: ${stylists}" 
+      				th:if="${st.id} == ${item.userId}"
+              		th:text="${st.name}">No Valid</td>
+              <td th:switch="${item.status}">
+              	<span class="text-red font-italic" th:case="'0'">Chưa thanh toán</span>
+              	<span class="text-green font-italic" th:case="'1'">Đã thanh toán</span>
+              	<span class="font-italic" th:case="*">No Valid</span>
+              </td>
+              <td th:if="${item.status} == 0">
+                   <a th:href="@{/admin/bill-detail(id=${item.id})}" class="btn btn-sm btn-warning">
+                       <i class="fa fa-dollar"></i>
+                   </a>
+                   <a data-confirm='Bạn thật sự muốn xóa hoá đơn này ?'
+                    th:href="@{/admin/bill/delete(id=${item.id})}" class="btn btn-sm btn-danger">
+                       <i class="fa fa-trash-o"></i>
+                   </a>
+               </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+	</div>
+	</div>
+	</div>
+</div>
+<script th:inline="javascript" layout:fragment="jscript">
+/*<![CDATA[*/
+var empty = /*[[${error}]]*/ 'default';
+var success = /*[[${success}]]*/ 'default';
+if(empty){
+	swal("LỐI", empty, "error");
+}else if(success){
+	swal("Thành công", success, "success");
+}
+/*]]>*/
+
+$(document).ready(function(){
+    $('[data-confirm]').on('click', function(e){
+        e.preventDefault(); //cancel default action
+
+        //Recuperate href value
+        var href = $(this).attr('href');
+        var message = $(this).data('confirm');
+
+        //pop up
+        swal({
+            title: "Are you sure ??",
+            text: message, 
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            timer:3000,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            swal("Success! Xóa thành công!", {
+              icon: "success",
+              timer:4000
+            });
+            window.location.href = href;
+          }
+        });
+    });
+});
+</script>
+</body>
+</html>

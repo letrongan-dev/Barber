@@ -11,7 +11,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
+import com.myproject.dto.Error;
 import com.myproject.dto.UserDto;
 import com.myproject.dto.UserDtoUpdate;
 import com.myproject.entity.User;
@@ -157,5 +157,34 @@ public class UserServiceImpl implements UserService {
 		return stylist;
 	}
 
+
+	@Override
+	public List<UserDto> listStylistAndCus(int idST, int idCus) {
+		List<User> listSC = userRepository.listStylistAndCus(3, 4);
+		List<UserDto> dtos = new ArrayList<UserDto>();
+		for(User entity : listSC) {
+			dtos.add(entityChangeToDto(entity));
+		}
+		return dtos;
+	}
+
+
+	@Override
+	public Object checkLogin(UserDto dto) {
+		List<User> entitys = userRepository.listStylistAndCus(3, 4);
+		boolean checked = true;
+		for (User u : entitys) {
+			checked = BCrypt.checkpw(dto.getPassword(), u.getPassword());
+			if(u.getEmail() == dto.getEmail() && checked) {
+				UserDto userDto = entityChangeToDto(u);
+				return new Error(1,null, userDto);
+			}else if(u.getEmail() != dto.getEmail() || !checked) {
+				return new Error(2,"Sai thông tin đăng nhập!");
+			}else {
+				return new Error(3,"Tài khoản không tồn tại");
+			}
+		}
+		return null;
+	}
 
 }

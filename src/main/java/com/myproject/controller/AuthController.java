@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("")
-public class LoginController {
+public class AuthController {
 
 	@GetMapping(value = "/login")
 	public String index(@RequestParam(value = "error" , defaultValue = "", required = false) String error , ModelMap model) {

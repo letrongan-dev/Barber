@@ -11,7 +11,50 @@
 </head>
 <body>
 <div th:replace="fragment/frontend/navbar :: navbar"></div>
-<div layout:fragment="content"></div>
+ <!-- Modal HTML Markup -->
+<div id="ModalLoginForm" class="modal fade pt-5">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title">Login</h1>
+            </div>
+            <div class="modal-body">
+                <form role="form" method="POST" th:action="@{/user/login}" th:object="${user}">
+                    <div class="form-group">
+                        <label class="control-label">E-Mail Address</label>
+                        <div>
+                            <input type="email" class="form-control input-lg" name="email" th:field="*{email}" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Password</label>
+                        <div>
+                            <input type="password" class="form-control input-lg" th:field="*{password}" name="password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="remember"> Remember Me
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <button type="submit" class="btn btn-success">Login</button>
+ 
+                            <a class="btn btn-link" href="">Forgot Your Password?</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div layout:fragment="content">
+</div>
 <div th:replace="fragment/frontend/footer :: footer"></div>
 <th:block th:replace="fragment/frontend/script"/>
 
