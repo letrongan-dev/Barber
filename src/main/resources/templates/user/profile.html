@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="layout/backend/default"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<title>Profile</title>
+</head>
+<body>
+<div class="content-wrapper" layout:fragment="content"> 
+    <!-- Content Header (Page header) -->
+    <div class="content-header sty-one">
+      <h1>Profile page</h1>
+      <ol class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><i class="fa fa-angle-right"></i> <a href="#">Pages</a></li>
+        <li><i class="fa fa-angle-right"></i> Profile page</li>
+      </ol>
+    </div>
+    
+    <!-- Main content -->
+    <div class="content" th:each="item: ${user}">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="user-profile-box m-b-3">
+            <div class="box-profile text-white"> <img class="profile-user-img img-responsive img-circle m-b-2" th:src="@{${#authentication.principal.avatar}}" alt="User profile picture">
+              <h3 class="profile-username text-center" th:text="${item.name}">Alexander Pierce</h3>
+              <p class="text-center" th:text="${item.email}">© alexanderpierce</p>
+            </div>
+          </div>
+          <div class="card m-b-3">
+            <div class="card-body">
+              <div class="box-body"> 
+                <strong><i class="fa fa-map-marker margin-r-5"></i> Địa chỉ</strong>
+                <p class="text-muted" th:text="${item.address}">Malibu, California</p>
+                <hr>
+                <strong><i class="fa fa-envelope margin-r-5" ></i> Email address </strong>
+                <p class="text-muted" th:text="${item.email}">alexanderpierce@gmail.com</p>
+                <hr>
+                <strong><i class="fa fa-phone margin-r-5"></i> Phone</strong>
+                <p th:text="${item.phone}">(123) 456-7890 </p>
+                <hr>
+                <strong><i class="fa fa-phone margin-r-5"></i> Social Profile</strong>
+                <div class="text-left"> <a class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></a> <a class="btn btn-social-icon btn-google"><i class="fa fa-google-plus"></i></a> <a class="btn btn-social-icon btn-linkedin"><i class="fa fa-linkedin"></i></a> <a class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a> </div>
+              </div>
+              <!-- /.box-body --> 
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="info-box">
+            <div class="card tab-style1"> 
+              <!-- Nav tabs -->
+              <ul class="nav nav-tabs profile-tab" role="tablist">
+                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#profile" role="tab" aria-expanded="true">Profile</a> </li>
+                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#settings" role="tab" aria-expanded="false">Settings</a> </li>
+              </ul>
+              <!-- Tab panes -->
+              <div class="tab-content">
+                <!--second tab-->
+                <div class="tab-pane active" id="profile" role="tabpanel" aria-expanded="true">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-lg-3 col-xs-6 b-r"> <strong>Họ tên</strong> <br>
+                        <p class="text-muted" th:text="${item.name}">Florence Douglas</p>
+                      </div>
+                      <div class="col-lg-3 col-xs-6 b-r"> <strong>Mobile</strong> <br>
+                        <p class="text-muted" th:text="${item.phone}">(123) 456 7890</p>
+                      </div>
+                      <div class="col-lg-3 col-xs-6 b-r"> <strong>Email</strong> <br>
+                        <p class="text-muted" th:text="${item.email}">florencedouglas@admin.com</p>
+                      </div>
+                      <div class="col-lg-3 col-xs-6 b-r"> <strong>Chức vụ</strong> <br>
+                        <p class="text-muted" th:each="r : ${roles}" th:if="${r.id} == ${item.roleId}" th:text="${r.desc}">florencedouglas@admin.com</p>
+                      </div>
+                    </div>
+                    <hr>
+                    <div>
+                      <div class="col-lg-8" sec:authorize="hasRole('ROLE_STYLIST')">
+			          <div class="widget-info bg-primary">
+			            <div class="card-body">
+			              
+			                <div class="col-md-6 text-white">
+			                  <p>Tổng số lịch hẹn</p>
+			                  <h2 class="font-weight-bold" th:text="${quanty}" >$15,859</h2>
+			                </div>
+			              
+			            </div>
+			          </div>
+			        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="settings" role="tabpanel">
+                  <div class="card-body">
+                  <h3 class="text-center text-red">Đổi mật khẩu</h3>
+                    <form th:action="@{/auth/change-password}" th:object="${authChange}" class="form-horizontal form-material" method="post">
+                      <input type="hidden" name="id" th:value="${item.id}">
+                      <div class="form-group">
+                        <label class="col-md-6 offset-md-3">Mật khẩu cũ</label>
+                        <div class="col-md-6 offset-md-3">
+                          <input value="password" class="form-control form-control-line" type="password" th:field="*{oldPassword}">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-md-6 offset-md-3">Mật khẩu mới</label>
+                        <div class="col-md-6 offset-md-3">
+                          <input value="password" class="form-control form-control-line" type="password" th:field="*{newPassword}">
+                        </div>
+                      </div>
+                      
+                      <div class="form-group">
+                        <label class="col-md-6 offset-md-3">Nhập lại mật khẩu mới</label>
+                        <div class="col-md-6 offset-md-3">
+                          <input value="password" class="form-control form-control-line" type="password" name="rePassword">
+                        </div>
+                      </div>
+                     
+                      <div class="form-group">
+                        <div class="col-sm-12 text-center">
+                          <button class="btn btn-success">Update Password</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Main row --> 
+    </div>
+    <!-- /.content --> 
+  </div>
+<script th:inline="javascript" layout:fragment="jscript">
+/*<![CDATA[*/
+	var errorRe = /*[[${errorRe}]]*/ 'default';
+	var errorOld = /*[[${errorOld}]]*/ 'default';
+	var success = /*[[${success}]]*/ 'default';
+	if(success){
+		swal("Thành công!", success, "success");
+	}else if(errorRe){
+		swal("Thất bại!", errorRe, "error");
+	}else if(errorOld){
+		swal("Thất bại!", errorOld, "error");
+	}
+/*]]>*/
+</script>	
+</body>
+</html>

@@ -28,7 +28,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 		//List danh sách role bắt buộc dù chỉ có 1 phần tử
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		authorities.add(new SimpleGrantedAuthority(user.getRoleName()));
-		UserDetailsDto dto = new UserDetailsDto(user.getEmail(), user.getPassword(), authorities, user.getName(),user.getAvatar());
+		UserDetailsDto dto = new UserDetailsDto(user.getEmail(), user.getPassword(), authorities, user.getName(),user.getAvatar(), user.getPhone(), user.getAddress(), user.getEmail(), user.getCode());
 		return dto;
 	}
 

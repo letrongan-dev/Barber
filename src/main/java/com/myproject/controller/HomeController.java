@@ -51,18 +51,4 @@ public class HomeController {
 		return "test";
 	}
 	
-	@PostMapping(value = "/user/login")
-	public String login(@Valid @ModelAttribute("user") UserDto userDto, BindingResult bindingResult, RedirectAttributes re) {
-		Error err = (Error) userSer.checkLogin(userDto);
-		if(err.getStatus()==1) {
-			re.addFlashAttribute("success", "Đăng nhập thành công");
-			return "redirect:/service";
-		}else if(err.getStatus() == 2) {
-			re.addFlashAttribute("error", err.getMessage());
-			return "redirect:/";
-		}else {
-			re.addFlashAttribute("notexists", err.getMessage());
-			return "redirect:/";
-		}
-	}
 }

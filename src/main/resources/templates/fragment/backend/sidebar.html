@@ -1,6 +1,6 @@
 <aside class="main-sidebar" xmlns:th="http://www.thymeleaf.org" th:fragment="sidebar" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"> 
     <!-- sidebar -->
-    <div class="sidebar"> 
+    <div class="sidebar" sec:authorize="hasAnyRole('ROLE_ADMINISTRATOR','ROLE_MANAGER')"> 
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="image text-center"><img th:src="${#authentication.principal.avatar}" class="img-circle" alt="User Image"> </div>

@@ -4,9 +4,10 @@ package com.myproject.service;
 
 import java.util.List;
 
-
+import com.myproject.dto.AuthChangePasswordDto;
 import com.myproject.dto.UserDto;
 import com.myproject.dto.UserDtoUpdate;
+import com.myproject.entity.User;
 
 public interface UserService {
 	List<UserDto> findAll();
@@ -19,6 +20,6 @@ public interface UserService {
 	String generateRandom(int len);
 	int checkExist(String email);
 	List<UserDto> listStylist();
-	List<UserDto> listStylistAndCus(int idST, int idCus);
-	Object checkLogin(UserDto dto);
+	int changePass (AuthChangePasswordDto dto);
+	void addCustomer (UserDto dto);
 }

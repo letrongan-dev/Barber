@@ -123,9 +123,7 @@ public class UserController {
         	userService.edit(userDtoUpdate);
         	re.addFlashAttribute("success", "Cập nhật thành công!");
             return "redirect:/admin/user";
-        }
-        
-        
+        } 
     }
 }
 	

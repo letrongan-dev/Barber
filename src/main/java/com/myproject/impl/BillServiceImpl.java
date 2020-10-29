@@ -23,7 +23,7 @@ public class BillServiceImpl implements BillService {
 	
 	@Override
 	public List<BillDto> findAll() {
-		List<Bill> entities = billRepos.findAll();
+		List<Bill> entities = (List<Bill>) billRepos.findAll();
 		List<BillDto> dtos = new ArrayList<BillDto>();
 		for( Bill b : entities) {
 			dtos.add(entityChangeDto(b));
