@@ -26,9 +26,12 @@ public class AppointmentServiceImpl implements AppointmentService {
 	@Autowired
 	private UserRepository userReps;
 	
+	SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, yyyy");
+
+	
 	@Override
 	public int add(AppointmentDto appDto) {
-//		SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd HH:mm:ss");
+
 		Calendar c1 = Calendar.getInstance();
         Calendar c2 = Calendar.getInstance();
         
@@ -72,12 +75,13 @@ public class AppointmentServiceImpl implements AppointmentService {
 		appDto.setId(entity.getId());
 		appDto.setName(entity.getName());
 		appDto.setNameStylist(entity.getNameStylist());
-		appDto.setDate(entity.getDate());
+		appDto.setDateString(dateFormat.format((entity.getDate())));
 		appDto.setPhone(entity.getPhone());
 		appDto.setTime(entity.getTime());
 		appDto.setMessage(entity.getMessage());
 		appDto.setComboId(entity.getComboId());
 		appDto.setStylistId(entity.getUserId());
+		appDto.setDate(entity.getDate());
 		return appDto;
 	}
 	
@@ -119,5 +123,15 @@ public class AppointmentServiceImpl implements AppointmentService {
 		entity.setComboId(appDto.getComboId());
 		entity.setMessage(appDto.getMessage());
 		appRepsitory.save(entity);
+	}
+
+	@Override
+	public List<AppointmentDto> listAppByPhone(String phone) {
+		List<Appointment> listEntity = appRepsitory.listAppByPhone(phone);
+		List<AppointmentDto> listDto = new ArrayList<AppointmentDto>();
+		for(Appointment entity : listEntity) {
+			listDto.add(entityChangeDto(entity));
+		}
+		return listDto;
 	}
 }

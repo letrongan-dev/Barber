@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.csrf().disable()
 		.antMatcher("/**") //Kiểm tra với URL bắt đầu bằng /
 		.authorizeRequests()//Phân quyền
-		.antMatchers("/login","/","/service","/appointment","/blog/**","/about")
+		.antMatchers("/login","/","/service","/appointment","/blog/**","/about","/user/register","/api/appointment")
 		.permitAll()
 		.antMatchers("/admin/**")
 		.hasAnyRole("ADMINISTRATOR","MANAGER")
@@ -62,9 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		http.logout()
 		.logoutUrl("/logout")
-		.logoutSuccessUrl("/")
-		.deleteCookies("JSESSIONID");
-		
+		.logoutSuccessUrl("/");	
 		http.exceptionHandling()
 		.accessDeniedPage("/error/403");
 	}

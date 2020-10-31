@@ -3,8 +3,15 @@ package com.myproject.dto;
 public class AuthChangePasswordDto {
 
 	private int id; 
+	private String code;
 	private String oldPassword;
 	private String newPassword;
+	
+	public AuthChangePasswordDto(String code, String oldPassword) {
+		this.code = code;
+		this.oldPassword = oldPassword;
+	}
+	
 	public AuthChangePasswordDto(int id, String oldPassword, String newPassword) {
 		super();
 		this.id = id;
@@ -39,5 +46,14 @@ public class AuthChangePasswordDto {
 	public void setNewPassword(String newPassword) {
 		this.newPassword = newPassword;
 	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+	
 	
 }

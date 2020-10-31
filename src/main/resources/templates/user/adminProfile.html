@@ -1,40 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorator="layout/frontend/default" 
-	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+	  layout:decorator="layout/backend/default"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta charset="UTF-8">
-<title>Profile | HairCare</title>
-<th:block th:replace="fragment/backend/styles"/>
+<title>Danh sách người dùng</title>
 </head>
 <body>
-<div class="content-wrapper" layout:fragment="content">
-<section class="hero-wrap hero-wrap-2" th:style="'background-image:url(' + @{/frontend/images/bg-1.jpg} + ');'" data-stellar-background-ratio="0.5">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
-        <div class="col-md-9 ftco-animate pb-5 text-center">
-          <h2 class="mb-0 bread">Profile</h2>
-          <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-round-forward"></i></a></span> <span>Profile</span></p>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <section class="services-section ftco-section">  
-  <div class="content" th:each="item: ${user}">
+<div layout:fragment="content">
+<div class="content" th:each="item: ${user}">
       <div class="row">
         <div class="col-lg-4">
           <div class="user-profile-box m-b-3">
-            <div class="box-profile text-white"> <img class="profile-user-img img-responsive img-circle m-b-2" th:src="@{${#authentication.principal.avatar}}" alt="User profile picture">
-              <div class="text-center">
-              	<h3 class="profile-username text-center" th:text="${item.name}">Alexander Pierce</h3>
-              	<a th:href="@{/logout}"><i class="fa fa-power-off " style="font-size: 50px;" ></i></a> 
-              </div>
+            <div class="box-profile text-white"> <img class="profile-user-img img-responsive img-circle m-b-2" th:src="${#authentication.principal.avatar}" alt="User profile picture">
+              <h3 class="profile-username text-center" sec:authentication ="principal.fullname">Alexander Pierce</h3>
+              <p class="text-center" sec:authentication ="principal.email">© alexanderpierce</p>
             </div>
           </div>
-          <div class="card m-b-3" sec:authorize="hasAnyRole('ROLE_ADMINISTRATOR','ROLE_MANAGER','ROLE_STYLIST')">
+          <div class="card m-b-3">
             <div class="card-body">
               <div class="box-body"> 
                 <strong><i class="fa fa-map-marker margin-r-5"></i> Địa chỉ</strong>
@@ -62,6 +46,7 @@
                 <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#settings" role="tab" aria-expanded="false">Settings</a> </li>
               </ul>
               <!-- Tab panes -->
+               <!-- Tab panes -->
               <div class="tab-content">
                 <!--second tab-->
                 <div class="tab-pane active" id="profile" role="tabpanel" aria-expanded="true">
@@ -82,47 +67,10 @@
                     </div>
                     <hr>
                     <div>
-                      <div class="col-lg-8" sec:authorize="hasRole('ROLE_STYLIST')">
-			          <div class="widget-info bg-primary">
-			            <div class="card-body">
-			              
-			                <div class="col-md-6 text-white">
-			                  <p>Tổng số lịch hẹn</p>
-			                  <h2 class="font-weight-bold" th:text="${quanty}" >$15,859</h2>
-			                </div>
-			              
-			            </div>
-			          </div>
-			        </div>
+                      
                     </div>
                   </div>
-                  <div class="col-lg-12">
-		            <h4 class="text-black">Lịch sử lịch hẹn</h4>
-		            <div class="table-responsive">
-		              <table class="table table-striped">
-		                <thead>
-		                  <tr>
-		                    <th scope="col">Date</th>
-		                    <th scope="col">Time</th>
-		                    <th scope="col">Name</th>
-		                    <th scope="col">Phone</th>
-		                    <th scope="col">Combo</th>
-		                  </tr>
-		                </thead>
-		                <tbody>
-		                  <tr th:each="app : ${history}">
-		                    <th scope="row" th:text="${app.dateString}"></th>
-		                    <td th:text="${app.time}">Mark</td>
-		                    <td th:text="${app.name}">Otto</td>
-		                    <td th:text="${app.phone}">@mdo</td>
-		                    <td  th:each="cb : ${combos}" 
-    							th:if ="${app.comboId} == ${cb.id}"
-    							th:text="${cb.name}"></td>
-		                  </tr>
-		                </tbody>
-		              </table>
-		            </div>
-		          </div>
+                  
                 </div>
                 <div class="tab-pane" id="settings" role="tabpanel">
                   <div class="card-body">
@@ -164,10 +112,8 @@
       </div>
       <!-- Main row --> 
     </div>
-    <!-- /.content --> 
-  </section>
-  </div>
-<script th:inline="javascript" layout:fragment="js">
+</div>
+<script th:inline="javascript" layout:fragment="jscript">
 /*<![CDATA[*/
 var success = /*[[${success}]]*/ 'default';
 var error = /*[[${error}]]*/ 'default';
@@ -183,7 +129,34 @@ if(success){
 	swal("Thất bại!", errorOld, "error");
 }
 /*]]>*/
+$(document).ready(function(){
+    $('[data-confirm]').on('click', function(e){
+        e.preventDefault(); //cancel default action
+
+        //Recuperate href value
+        var href = $(this).attr('href');
+        var message = $(this).data('confirm');
+
+        //pop up
+        swal({
+            title: "Are you sure ??",
+            text: message, 
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            timer:3000,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            swal("Success! Xóa thành công!", {
+              icon: "success",
+              timer:4000
+            });
+            window.location.href = href;
+          }
+        });
+    });
+});
 </script>
- */
 </body>
 </html>

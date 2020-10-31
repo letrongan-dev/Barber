@@ -11,7 +11,7 @@
 		<li class="nav-item"><a th:href="@{/service}" class="nav-link">Services</a></li>
 		<li class="nav-item"><a th:href="@{about}" class="nav-link">About</a></li>
 		<li class="nav-item"><a th:href="@{/blog}" class="nav-link">Blog</a></li>
-		<li class="nav-item"><a th:href="@{/profile}" class="nav-link btn btn-primary btn-md" sec:authorize="isAuthenticated()" sec:authentication ="principal.fullname">Contact</a></li>
+		<li class="nav-item"><a href="#" class="nav-link btn btn-primary btn-md" sec:authorize="isAuthenticated()" sec:authentication ="principal.fullname">Contact</a></li>
 		<li class="nav-item"><a href="#" class="nav-link btn btn-primary btn-md" sec:authorize="!isAuthenticated()" data-toggle="modal" data-target="#ModalLoginForm">LOGIN</a></li>
 	</ul>
 	</div>

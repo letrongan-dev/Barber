@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.myproject.dto.BillDto;
 import com.myproject.entity.Bill;
 
 @Repository
@@ -17,4 +18,7 @@ public interface BillRepository extends JpaRepository<Bill, Integer>  {
 	
 	@Query("SELECT COUNT(b.id) FROM Bill b where b.status = :status and b.userId = :userId")
 	long countBillUserId(@Param("status")int status, @Param("userId") int userId);
+	
+	@Query("SELECT b FROM Bill b where b.userId = :userId")
+	List<Bill> listBillByUserid(@Param("userId") int userId);
 }

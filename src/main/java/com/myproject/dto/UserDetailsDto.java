@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.User;
 public class UserDetailsDto extends User {
 	private static final long serialVersionUID = 1L;
 	
+	private int id;
 	private String fullname;
 	private String avatar;
 	private String email;
@@ -15,9 +16,11 @@ public class UserDetailsDto extends User {
 	private String phone;
 	private String address;
 	private String code;
+	private User user;
 
-	public UserDetailsDto(String username, String password, Collection<? extends GrantedAuthority> authorities, String fullname, String avatar, String phone, String address, String email, String code) {
+	public UserDetailsDto(String username, String password, Collection<? extends GrantedAuthority> authorities,int id, String fullname, String avatar, String phone, String address, String email, String code) {
 		super(username, password, authorities);
+		this.id = id;
 		this.fullname = fullname;
 		this.avatar = "/upload/user/"+avatar;
 		this.address = address;
@@ -68,4 +71,17 @@ public class UserDetailsDto extends User {
 	public void setCode(String code) {
 		this.code = code;
 	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 }

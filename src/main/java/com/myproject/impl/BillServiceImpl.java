@@ -99,6 +99,16 @@ public class BillServiceImpl implements BillService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<BillDto> listBillByUserid(int userId) {
+		List<Bill> entities = billRepos.listBillByUserid(userId);
+		List<BillDto> dtos = new ArrayList<BillDto>();
+		for( Bill b : entities) {
+			dtos.add(entityChangeDto(b));
+		}
+		return dtos;
+	}
 	
 
 }

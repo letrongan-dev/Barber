@@ -45,6 +45,12 @@ public class HomeController {
 		model.addAttribute("user", user);
 		return "home/index";
 	}
+	@GetMapping(value = "/about")
+	public String about(ModelMap model) {
+		List<UserDto> dtos = userSer.listStylist();
+		model.addAttribute("stylist", dtos);
+		return "home/about";
+	}
 	
 	@GetMapping(value = "/test")
 	public String test() {

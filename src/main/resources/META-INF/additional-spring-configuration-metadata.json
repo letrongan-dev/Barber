@@ -8,5 +8,10 @@
     "name": "ckeditor.access.image.url",
     "type": "java.lang.String",
     "description": "A description for 'ckeditor.access.image.url'"
+  },
+  {
+    "name": "jwt.secret",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.secret'"
   }
 ]}

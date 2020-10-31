@@ -155,7 +155,35 @@
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
 		</dependency>
-		
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+		<dependency>
+		  <groupId>org.apache.commons</groupId>
+		  <artifactId>commons-lang3</artifactId>
+		</dependency>
+		 
+		<!-- https://mvnrepository.com/artifact/com.auth0/auth0 -->
+		<dependency>
+		    <groupId>com.auth0</groupId>
+		    <artifactId>auth0</artifactId>
+		    <version>1.5.0</version>
+		</dependency>
+		 
+		<!-- https://mvnrepository.com/artifact/com.auth0/auth0-spring-security-api -->
+		<dependency>
+		    <groupId>com.auth0</groupId>
+		    <artifactId>auth0-spring-security-api</artifactId>
+		    <version>1.0.0</version>
+		</dependency>
+		<dependency>
+	        <groupId>com.fasterxml.jackson.dataformat</groupId>
+	        <artifactId>jackson-dataformat-xml</artifactId>
+	    </dependency>
+	    
 	</dependencies>
 	
 	

@@ -36,6 +36,8 @@ public class AppointmentDto {
 	private int comboId;
 	
 	private int stylistId;
+	
+	private String dateString;
 
 	public AppointmentDto() {
 		
@@ -140,4 +142,11 @@ public class AppointmentDto {
 	public void setStylistId(int stylistId) {
 		this.stylistId = stylistId;
 	}
+	public String getDateString() {
+		return dateString;
+	}
+	public void setDateString(String dateString) {
+		this.dateString = dateString;
+	}
+	
 }

@@ -94,7 +94,7 @@
                 <div class="pull-left user-img"><img th:src="${#authentication.principal.avatar}" class="img-responsive img-circle" alt="User"></div>
                 <p class="text-left" sec:authentication ="principal.fullname">Alexander Pierce <small sec:authentication ="principal.username">alexander@gmail.com</small> </p>
               </li>
-              <li><a th:href="@{/profile}"><i class="icon-profile-male"></i> My Profile</a></li>
+              <li><a th:href="@{/admin/profile}"><i class="icon-profile-male"></i> My Profile</a></li>
               <li><a th:href="@{/logout}" sec:authorize="isAuthenticated()"><i class="fa fa-power-off"></i> Logout</a></li>
             </ul>
           </li>

@@ -161,7 +161,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int changePass(AuthChangePasswordDto dto) {
-		User entity = userRepository.getOne(dto.getId());
+		User entity = userRepository.findByCode(dto.getCode());
 		boolean checked = BCrypt.checkpw(dto.getOldPassword(), entity.getPassword());
 		if(!checked) {
 			return 1;

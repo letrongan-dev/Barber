@@ -7,6 +7,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
@@ -19,9 +21,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.myproject.dto.AppointmentDto;
+import com.myproject.dto.AuthChangePasswordDto;
+import com.myproject.dto.ComboDto;
 import com.myproject.dto.RoleDto;
 import com.myproject.dto.UserDto;
 import com.myproject.dto.UserDtoUpdate;
+import com.myproject.reponsitory.UserRepository;
 import com.myproject.service.RoleService;
 import com.myproject.service.UserService;
 import com.myproject.util.FileUploadUtil;
@@ -36,6 +42,8 @@ public class UserController {
 	@Autowired
 	private RoleService roleService;
 
+	@Autowired
+	private UserRepository userReps;
 	
 	@GetMapping(value = "/user")
 	public String index(ModelMap model) {
@@ -125,6 +133,17 @@ public class UserController {
             return "redirect:/admin/user";
         } 
     }
+	@GetMapping(value = "/profile")
+	public String profile(ModelMap model) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = ((UserDetails) principal).getUsername();
+		UserDto user = userReps.findByEmailDto(username);
+		AuthChangePasswordDto authChange = new AuthChangePasswordDto();
+		model.addAttribute("authChange", authChange);
+		model.addAttribute("user", user);
+		return "user/adminProfile";
+	}
+	
 }
 	
 	
