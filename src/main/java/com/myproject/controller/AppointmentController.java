@@ -102,10 +102,6 @@ public class AppointmentController {
 				if(appDto.getStylistId() == user.getId()) {
 					appDto.setNameStylist(user.getName());
 					appDto.setComboId(dto.getComboId());
-					appDto.setDate(dto.getDate());
-					appDto.setName(dto.getName());
-					appDto.setPhone(dto.getPhone());
-					appDto.setTime(dto.getTime());
 					appServ.edit(appDto);
 					re.addFlashAttribute("success", "Cập nhật thành công!");
 				}

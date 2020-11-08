@@ -20,18 +20,10 @@
     		<h4 class="text-black text-center"><strong>Update Stylist</strong></h4>
     	<form method="post" th:action="@{/admin/appointment/update}" th:object="${app}">
     	<input class="form-control" type="hidden" th:field="*{id}">
-    	<div class="col-md-6 offset-md-3" th:if="${app.nameStylist==null}">
+    	<div class="col-md-6 offset-md-3">
         	<label>Stylist</label>
            	<select class="form-control" th:field="*{stylistId}">
               	<option th:each="item : ${stylists}" th:value="${item.id}"  th:text="${item.name}"></option>
-            </select>
-        </div>
-    	<div class="col-md-6 offset-md-3" th:if="${app.nameStylist!=null}">
-        	<label>Stylist</label>
-           	<select class="form-control" disabled>
-              	<option th:each="item : ${stylists}" 
-              			th:if="${app.nameStylist} == ${item.name}"
-              			th:text="${item.name}"></option>
             </select>
         </div>
     	<div class="col-md-6 offset-md-3">
@@ -68,9 +60,9 @@
         <div class="col-md-6 offset-md-3">
           <fieldset class="form-group">
           	<label>Combo</label>
-            <select th:field="*{comboId}" class="form-control form-control-line" disabled>
-				<option th:each="item : ${combos}" th:value="${item.id}"  th:text="${item.name}"></option>
-			</select>
+            <select class="form-control" th:field="*{comboId}" disabled>
+              	<option th:each="cb : ${combos}" th:value="${cb.id}"  th:text="${cb.name}"></option>
+            </select>
           </fieldset>
         </div>
         <div class="col-md-6 offset-md-3 text-center mt-4">

@@ -1,0 +1,27 @@
+* Giới thiệu dự án
+- Dự án triển khai SpringBoot Framework phục vụ mục đích của khóa học
+đồ án tốt nghiệp
+- Ngoài CRUD, dự án có chức năng phân quyền quản trị sử dụng
+SpringSecurity, Spring JPA để tạo cơ sở dữ liệu, Kiểm tra xác thực các ràng buộc,
+Sweet Alert giúp giao diện đẹp hơn, Thymeleaf, Hibernate ORM
+- Hệ thống hỗ trợ CKeditor trình soạn thảo để viết blog
+- SQL: tạo trigger insert tự động khi khách hàng tạo 1 appointment
+thì data sẽ insert vào bảng bill tương ứng với 1 appointment ở dạng
+chưa thanh toán
+
+* Nội dung dự án:
+- Dự án cho phép khách hàng đặt lịch cắt tóc tại cửa hàng mà không cần
+cần phải đến trước 
+- Hệ thống giúp cửa hàng quản lý dễ dàng hơn
+- Cung cấp một số api 
+
+* Hướng dẫn sử dụng
+- User đăng nhập khi có quyền là admin/manager hệ thống sẽ tự redirect về trang admin/dashboard để quản lý các module
+- Nếu user có quyền là Stylist/Member sẽ về trang profile ở trang này thì có thể cập nhật lại mật khẩu, xem các lịch sử
+cắt tóc của mình, stylist thì xem được số lần cắt tóc cho khách
+ADMIN:
+username: le.trong.an256@gmail.com
+pass: 1234567
+
+Stylist: (xem db)
+pass: 123456
